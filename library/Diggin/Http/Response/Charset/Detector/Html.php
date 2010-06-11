@@ -31,17 +31,16 @@
  */
 class Diggin_Http_Response_Charset_Detector_Html
 {
-    const DETECT_ORDER = 'ASCII, JIS, UTF-8, EUC-JP, SJIS';
+    const DEFAULT_DETECT_ORDER = 'ASCII, JIS, UTF-8, eucJP-win, EUC-JP, SJIS-win, SJIS';
 
     /**
      * @var string $_detectOrder
      */
-    private static $_detectOrder = 'ASCII, JIS, UTF-8, EUC-JP, SJIS';
+    private static $_detectOrder = 'ASCII, JIS, UTF-8, eucJP-win, EUC-JP, SJIS-win, SJIS';
 
     private $_config = array('accept_header_ctype' => true,
-                             'force_detect_body' => true,
+                             'force_detect_body' => false,
                              'prefer_mime_name' => false);
-
     
     /**
      * Set detect-order (static)
@@ -51,7 +50,7 @@ class Diggin_Http_Response_Charset_Detector_Html
     public static function setDetectOrder($order)
     {
         if ($order === false) {
-            self::$_detectOrder = self::DETECT_ORDER;
+            self::$_detectOrder = self::DEFAULT_DETECT_ORDER;
         } else {
             self::$_detectOrder = $order;
         }
@@ -67,6 +66,22 @@ class Diggin_Http_Response_Charset_Detector_Html
         return self::$_detectOrder;
     }
 
+
+    public function getListAgainstMime()
+    {
+        return array(
+            'UUENCODE' => 'x-uuencode',
+            'ASCII' => 'US-ASCII',
+            'SJIS' => 'Shift_JIS',
+            'eucJP-win' => 'EUC-JP',
+            'SJIS-win' => 'Shift_JIS',
+            'JIS' => 'ISO-2022-JP',
+            'ISO-2022-JP-MS' => 'ISO-2022-JP',
+            'EUC-CN' => 'CN-GB',
+            'HZ' => 'HZ-GB-2312',
+            'BIG-5' => 'BIG5',
+        );
+    }
 
     
     /**
@@ -94,14 +109,14 @@ class Diggin_Http_Response_Charset_Detector_Html
         }
 
         /*
-         * Use mbstring to detect character encoding if available.
+         * detect character encoding
          */
-        if (extension_loaded('mbstring') and 
-            (!$encoding or (!$this->_config['force_detect_body']))) {
-            $detectOrder = mb_detect_order();
-            mb_detect_order(self::getDetectOrder());
-            $detect = @mb_detect_encoding($responseBody);
-            mb_detect_order($detectOrder);unset($detectOrder);//restore
+        if((in_array($encoding, $this->getListAgainstMime())) or (!$encoding or $this->_config['force_detect_body'])) {
+            $detect = @mb_detect_encoding($responseBody, self::getDetectOrder());
+        
+            if (in_array($encoding, $this->getListAgainstMime())) {
+                return $detect;
+            }
 
             if ($detect) {
                 if ($this->_config['prefer_mime_name']) {
@@ -117,6 +132,10 @@ class Diggin_Http_Response_Charset_Detector_Html
             require_once 'Diggin/Http/Response/Charset/Detector/Exception.php';
             throw new Diggin_Http_Response_Charset_Detector_Exception('Failed detecting character encoding.');
         }
+
+        //if ($wellknown = array_search($encoding, array('HZ-GB-2312' => 'GB-2312'))) {
+        //  return $wellknown;
+        //}
         
         return $encoding;
     }
@@ -130,17 +149,14 @@ class Diggin_Http_Response_Charset_Detector_Html
     protected static function _getCharsetFromCType($string)
     {
         $array = explode(';', $string);
-        /* array_walk($array, create_function('$item', 'return trim($item);')); */
         if (isset($array[1])) {
             $array = explode('=', $array[1]);
             if (isset($array[1])) {
                 $charset = trim($array[1]);
                 if (preg_match('/^UTF-?8$/i', $charset)) {
                     return 'UTF-8';
-                } elseif (function_exists('mb_preferred_mime_name')) {
-                    return @mb_preferred_mime_name($charset);
                 } else {
-                    return $charset;
+                    return @mb_preferred_mime_name($charset);
                 }
             }
         }
