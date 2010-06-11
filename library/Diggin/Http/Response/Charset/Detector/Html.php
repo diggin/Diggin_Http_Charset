@@ -66,9 +66,33 @@ class Diggin_Http_Response_Charset_Detector_Html
         return self::$_detectOrder;
     }
 
-
+    /**
+     * Get list - Don't use mb_preferred_mime_name()
+     * 
+     * @return array
+     */
     public function getListAgainstMime()
     {
+        /**
+        $preferrs = array();
+        $couldnt = array();
+        foreach(mb_list_encodings() as $k => $v) {
+            if($p = @mb_preferred_mime_name($v)) {
+                $preferrs[$k] = $p;
+            } else {
+                $couldnt[$k] = $v;
+            }
+        }
+
+        $diff = array_diff(mb_list_encodings(), $preferrs);
+        $diff = array_diff($diff, $couldnt);
+
+        $mb_list_against_preferr_mime = array();
+        foreach(array_flip($diff) as $v => $k){
+            $mb_list_against_preferr_mime[$v] = $preferrs[$k];
+        }
+        var_export($mb_list_against_preferr_mime);
+        */
         return array(
             'UUENCODE' => 'x-uuencode',
             'ASCII' => 'US-ASCII',
