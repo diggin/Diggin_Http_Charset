@@ -43,7 +43,6 @@ class Diggin_Http_Response_Charset_Front_UrlRegex
      *
      * @param array $document
      * @param array $remains
-     *
      * @return mixed string|array
      */
     public function encode($document, $remains = null)
@@ -67,9 +66,19 @@ class Diggin_Http_Response_Charset_Front_UrlRegex
         return $this->getDefaultEncoder()->encode($resouce, $remains);
     }
 
+    /**
+     * add Encoder
+     * $pattern should be preg-regex
+     *
+     * @param string $pattern
+     * @param Diggin_Http_Response_Charset_Encoder_EncoderInterface
+     * @return Diggin_Http_Response_Charset_Front_UrlRegex
+     */
     public function addEncoder($pattern, Diggin_Http_Response_Charset_Encoder_EncoderInterface $encoder)
     {
         $this->_encoderSet[$pattern] = $encoder;
+
+        return $this;
     }
 
     public function getEncoderSet()
