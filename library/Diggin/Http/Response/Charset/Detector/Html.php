@@ -27,23 +27,23 @@ class Diggin_Http_Response_Charset_Detector_Html
     /**
      * @var string $_detectOrder
      */
-    private static $_detectOrder = 'ASCII, JIS, UTF-8, eucJP-win, EUC-JP, SJIS-win, SJIS';
+    private $_detectOrder = 'ASCII, JIS, UTF-8, eucJP-win, EUC-JP, SJIS-win, SJIS';
 
     private $_config = array('accept_header_ctype' => true,
                              'force_detect_body' => false,
                              'prefer_mime_name' => false);
     
     /**
-     * Set detect-order (static)
+     * Set detect-order
      *
      * @param string $order
      */
-    public static function setDetectOrder($order)
+    public function setDetectOrder($order)
     {
         if ($order === false) {
-            self::$_detectOrder = self::DEFAULT_DETECT_ORDER;
+            $this->_detectOrder = self::DEFAULT_DETECT_ORDER;
         } else {
-            self::$_detectOrder = $order;
+            $this->_detectOrder = $order;
         }
     }
 
@@ -52,9 +52,9 @@ class Diggin_Http_Response_Charset_Detector_Html
      *
      * @return string
      */
-    public static function getDetectOrder()
+    public function getDetectOrder()
     {
-        return self::$_detectOrder;
+        return $this->_detectOrder;
     }
 
     /**
@@ -127,7 +127,7 @@ class Diggin_Http_Response_Charset_Detector_Html
          * detect character encoding
          */
         if((in_array($encoding, $this->getListAgainstMime())) or (!$encoding or $this->_config['force_detect_body'])) {
-            $detect = @mb_detect_encoding($responseBody, self::getDetectOrder());
+            $detect = @mb_detect_encoding($responseBody, $this->getDetectOrder());
         
             if (in_array($encoding, $this->getListAgainstMime())) {
                 return $detect;
