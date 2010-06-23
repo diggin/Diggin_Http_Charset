@@ -44,6 +44,6 @@ class My_Encoder extends Diggin_Http_Response_Charset_Encoder_EncoderAbstract
 //$front->addEncoder(My_Encoder::URL_REGEX, new My_Encoder);
 $front->addEncoder(My_Encoder::URL_REGEX, new Diggin_Http_Response_Charset_Encoder_Fixedfrom('SJIS-win'));
 
-$ret = $front->encode(array('url' => 'http://github.com/test', 'resouce' => $resouce), array($remains));
+$ret = $front->encode(array('url' => 'http://github.com/test', 'resouce' => $resouce));
 
 var_dump($ret);

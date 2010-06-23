@@ -1,15 +1,13 @@
 <?php
 
 /**
- * Original code borrowed from HTMLScraping
+ * Diggin_Http_Response_Charset
+ * 
+ * a part of this package (Diggin_Http_Response_Charset_Detector_Html) is
+ * borrowed from HTMLScraping
  * 
  * @see http://www.rcdtokyo.com/etc/htmlscraping/
  *
- * ---------------------------------------------------------------------
- * HTMLScraping class
- * ---------------------------------------------------------------------
- * PHP versions 5 (5.1.3 and later)
- * ---------------------------------------------------------------------
  * LICENSE: This source file is subject to the GNU Lesser General Public
  * License as published by the Free Software Foundation;
  * either version 2.1 of the License, or any later version
@@ -22,13 +20,6 @@
  * ---------------------------------------------------------------------
  */
 
-/**
- * Diggin - Simplicity PHP Library
- * 
- * @category   Diggin
- * @package    Diggin_Http
- * @subpackage Response
- */
 class Diggin_Http_Response_Charset_Detector_Html
 {
     const DEFAULT_DETECT_ORDER = 'ASCII, JIS, UTF-8, eucJP-win, EUC-JP, SJIS-win, SJIS';
