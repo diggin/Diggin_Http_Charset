@@ -34,15 +34,15 @@ abstract class Diggin_Http_Response_Charset_Encoder_EncoderAbstract
      * 
      * @return mixed
      */
-    final public function encode($resouce, $remains = null)
+    final public function encode($content, $remains = null)
     {
-        //if ($resouce instanceof Zend_Http_Response)
+        //if ($content instanceof Zend_Http_Response)
         $ctype = null;
-        if (is_array($resouce)) {
-            $ctype = $resouce['content-type'];
-            $body  = $resouce['body'];
-        } elseif (is_string($resouce)) {
-            $body = $resouce;
+        if (is_array($content)) {
+            $ctype = $content['content-type'];
+            $body  = $content['body'];
+        } elseif (is_string($content)) {
+            $body = $content;
         }
         
         $encoding_from = $this->_encodingFrom($body, $ctype);
