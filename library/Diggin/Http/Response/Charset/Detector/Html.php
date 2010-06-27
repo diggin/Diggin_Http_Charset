@@ -31,7 +31,7 @@ class Diggin_Http_Response_Charset_Detector_Html
 
     private $_config = array('accept_header_ctype' => true,
                              'force_detect_body' => false,
-                             'prefer_mime_name' => false);
+                             'detect_prefer_mime' => false);
     
     /**
      * Set detect-order
