@@ -30,6 +30,7 @@ final class Diggin_Http_Response_Charset
         if ($response instanceof Zend_Http_Response) {
 
             $headers = $response->getHeaders();
+            // Cut original Header's Charset
             if (isset($headers['Content-type'])) {
                 $headers['Content-type'] = trim(preg_replace('/charset=[A-Za-z0-9-_]+;*/i', '', $headers['Content-type']));
             }
