@@ -134,7 +134,7 @@ class Diggin_Http_Response_Charset_Detector_Html
             }
 
             if ($detect) {
-                if ($this->_config['prefer_mime_name']) {
+                if ($this->_config['detect_prefer_mime']) {
                     $detect = @mb_preferred_mime_name($detect);
                     if (!$detect) {
                         require_once 'Diggin/Http/Response/Charset/Detector/Exception.php';
