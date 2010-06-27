@@ -60,6 +60,9 @@ class Diggin_Http_Response_Charset_Front_UrlRegex
         // and remaind args will use backup var.
 
         if ($encoder = $this->_checkMatch((string)$url)) {
+            if (is_string($encoder)) {
+                $encoder = $this->_loadEncoder($encoder);
+            }
             return $encoder->encode($content, $remains);
         }
 
@@ -71,10 +74,10 @@ class Diggin_Http_Response_Charset_Front_UrlRegex
      * $pattern should be preg-regex
      *
      * @param string $pattern
-     * @param Diggin_Http_Response_Charset_Encoder_EncoderInterface
+     * @param mixed string|Diggin_Http_Response_Charset_Encoder_EncoderInterface
      * @return Diggin_Http_Response_Charset_Front_UrlRegex
      */
-    public function addEncoder($pattern, Diggin_Http_Response_Charset_Encoder_EncoderInterface $encoder)
+    public function addEncoder($pattern, $encoder)
     {
         $this->_encoderSet[$pattern] = $encoder;
 
@@ -93,6 +96,16 @@ class Diggin_Http_Response_Charset_Front_UrlRegex
                 return $encoder;
             }
         }
+    }
+
+    protected function _loadEncoder($encoder)
+    {
+        if (!class_exists($encoder)) {
+            require_once 'Zend/Loader.php';
+            $encoder = Zend_Loader::loadClass($encoder);
+        }
+
+        return new $encoder;
     }
 
     final static public function getDefaultEncoder()
