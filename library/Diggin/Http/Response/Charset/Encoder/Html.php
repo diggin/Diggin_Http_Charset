@@ -29,10 +29,10 @@ class Diggin_Http_Response_Charset_Encoder_Html
 
     protected function _encodingFrom($body, $ctype)
     {
-        return $this->getDetecter()->detect($body, $ctype);
+        return $this->getDetector()->detect($body, $ctype);
     }
 
-    final public function getDetecter()
+    final public function getDetector()
     {
         if (!$this->_detector) {
             require_once 'Diggin/Http/Response/Charset/Detector/Html.php';
