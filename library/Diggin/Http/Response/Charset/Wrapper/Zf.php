@@ -23,7 +23,7 @@
 class Diggin_Http_Response_Charset_Wrapper_Zf extends Zend_Http_Response 
 {
     /**
-     * @var Diggin_Http_Response_Charset_Front_EncodeInterface
+     * @var Diggin_Http_Response_Charset_Front_ConvertInterface
      */
     private $_charsetfront;
 
@@ -32,7 +32,7 @@ class Diggin_Http_Response_Charset_Wrapper_Zf extends Zend_Http_Response
      */
     private $_url;
 
-    public function setCharsetFront(Diggin_Http_Response_Charset_Front_EncodeInterface $charsetfront)
+    public function setCharsetFront(Diggin_Http_Response_Charset_Front_ConvertInterface $charsetfront)
     {
         $this->_charsetfront = $chasetfront;
     }
