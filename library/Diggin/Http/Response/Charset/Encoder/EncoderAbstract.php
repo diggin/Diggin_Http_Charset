@@ -39,7 +39,7 @@ abstract class Diggin_Http_Response_Charset_Encoder_EncoderAbstract
         //if ($content instanceof Zend_Http_Response)
         $ctype = null;
         if (is_array($content)) {
-            $ctype = $content['content-type'];
+            $ctype = (isset($content['content-type'])) ? $content['content-type'] : null;
             $body  = $content['body'];
         } elseif (is_string($content)) {
             $body = $content;
@@ -48,7 +48,7 @@ abstract class Diggin_Http_Response_Charset_Encoder_EncoderAbstract
         $encoding_from = $this->_encodingFrom($body, $ctype);
         $body = $this->_initBody($body);
 
-        if ($remains) {
+        if (isset($remains)) {
             @mb_convert_variables('UTF-8', $encoding_from, $body, $remains);
 
             return array($body, $remains);
