@@ -20,8 +20,26 @@
  * ---------------------------------------------------------------------
  */
 
-interface Diggin_Http_Response_Charset_Front_EncodeInterface
+require_once 'Diggin/Http/Response/Charset/Converter/ConverterAbstract.php';
+
+class Diggin_Http_Response_Charset_Converter_Html
+    extends Diggin_Http_Response_Charset_Converter_ConverterAbstract
 {
-    public function encode($content, $remains = null);
+    private $_detector;
+
+    protected function _encodingFrom($body, $ctype)
+    {
+        return $this->getDetector()->detect($body, $ctype);
+    }
+
+    final public function getDetector()
+    {
+        if (!$this->_detector) {
+            require_once 'Diggin/Http/Response/Charset/Detector/Html.php';
+            $this->_detector = new Diggin_Http_Response_Charset_Detector_Html();
+        }
+
+        return $this->_detector;
+    }
 }
 

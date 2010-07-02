@@ -20,26 +20,21 @@
  * ---------------------------------------------------------------------
  */
 
-require_once 'Diggin/Http/Response/Charset/Encoder/EncoderAbstract.php';
+require_once 'Diggin/Http/Response/Charset/Converter/ConverterAbstract.php';
 
-class Diggin_Http_Response_Charset_Encoder_Html
-    extends Diggin_Http_Response_Charset_Encoder_EncoderAbstract
+class Diggin_Http_Response_Charset_Converter_FixedFrom
+    extends Diggin_Http_Response_Charset_Converter_ConverterAbstract
 {
-    private $_detector;
+    private $_encodingFrom;
+
+    public function __construct($encodingFrom)
+    {
+        $this->_encodingFrom = $encodingFrom;
+    }
 
     protected function _encodingFrom($body, $ctype)
     {
-        return $this->getDetector()->detect($body, $ctype);
-    }
-
-    final public function getDetector()
-    {
-        if (!$this->_detector) {
-            require_once 'Diggin/Http/Response/Charset/Detector/Html.php';
-            $this->_detector = new Diggin_Http_Response_Charset_Detector_Html();
-        }
-
-        return $this->_detector;
+        return $this->_encodingFrom;
     }
 }
 

@@ -52,7 +52,7 @@ class Diggin_Http_Response_Charset_Wrapper_Zf extends Zend_Http_Response
         $content = array('body' => parent::getBody(), 'content-type' => $this->getHeader('content-type'));
         $document = array('url' => $this->getUrl(), 'content' => $content);
         
-        return $this->getCharsetFront()->encode($document);
+        return $this->getCharsetFront()->convert($document);
     }
 
     public function setUrl($url)

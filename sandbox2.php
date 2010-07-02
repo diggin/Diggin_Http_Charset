@@ -28,9 +28,9 @@ $response = Zend_Http_Response::fromString("$header\r\n\r\n$html");
 $front = new Diggin_Http_Response_Charset_Front_UrlRegex;
 $content = array('body' => $response->getBody(), 
                  'content-type' => $response->getHeader('content-type'));
-$ret = $front->encode(array('url' => 'test', 'content' => $content));
+$ret = $front->convert(array('url' => 'test', 'content' => $content));
 
-class My_Encoder extends Diggin_Http_Response_Charset_Encoder_EncoderAbstract
+class My_Converter extends Diggin_Http_Response_Charset_Converter_ConverterAbstract
 {
     const URL_REGEX = '#^http://github.com/*#s';
 
@@ -41,9 +41,9 @@ class My_Encoder extends Diggin_Http_Response_Charset_Encoder_EncoderAbstract
     }
 }
 
-//$front->addEncoder(My_Encoder::URL_REGEX, new My_Encoder);
-$front->addEncoder(My_Encoder::URL_REGEX, new Diggin_Http_Response_Charset_Encoder_Fixedfrom('SJIS-win'));
+//$front->addConverter(My_Converter::URL_REGEX, new My_Converter);
+$front->addConverter(My_Converter::URL_REGEX, new Diggin_Http_Response_Charset_Converter_Fixedfrom('SJIS-win'));
 
-$ret = $front->encode(array('url' => 'http://github.com/test', 'content' => $content));
+$ret = $front->convert(array('url' => 'http://github.com/test', 'content' => $content));
 
 var_dump($ret);

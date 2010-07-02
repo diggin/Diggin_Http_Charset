@@ -20,13 +20,13 @@
  * ---------------------------------------------------------------------
  */
 
-require_once 'Diggin/Http/Response/Charset/Encoder/EncoderInterface.php';
+require_once 'Diggin/Http/Response/Charset/Converter/ConverterInterface.php';
 
-abstract class Diggin_Http_Response_Charset_Encoder_EncoderAbstract
-    implements Diggin_Http_Response_Charset_Encoder_EncoderInterface
+abstract class Diggin_Http_Response_Charset_Converter_ConverterAbstract
+    implements Diggin_Http_Response_Charset_Converter_ConverterInterface
 {
     /**
-     * encode response
+     * Return converted Response'body
      * 
      * @param mixed
      * Zend_Http_Response | array('content-type' => $var, 'body' => $html) | string $html
@@ -34,7 +34,7 @@ abstract class Diggin_Http_Response_Charset_Encoder_EncoderAbstract
      * 
      * @return mixed
      */
-    final public function encode($content, $remains = null)
+    final public function convert($content, $remains = null)
     {
         //if ($content instanceof Zend_Http_Response)
         $ctype = null;

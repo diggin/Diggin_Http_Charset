@@ -20,24 +20,24 @@
  * ---------------------------------------------------------------------
  */
 
-require_once 'Diggin/Http/Response/Charset/Front/EncodeInterface.php';
-require_once 'Diggin/Http/Response/Charset/Encoder/EncoderInterface.php';
+require_once 'Diggin/Http/Response/Charset/Front/ConvertInterface.php';
+require_once 'Diggin/Http/Response/Charset/Converter/ConverterInterface.php';
 
 class Diggin_Http_Response_Charset_Front_UrlRegex 
-    implements Diggin_Http_Response_Charset_Front_EncodeInterface
+    implements Diggin_Http_Response_Charset_Front_ConvertInterface
 {
     /**
-     * @var Diggin_Http_Response_Charset_Encoder_EncoderInterface
+     * @var Diggin_Http_Response_Charset_Converter_ConverterInterface
      */
-    static private $_defaultEncoder;
+    static private $_defaultConverter;
 
     /**
      * @var array
      */
-    protected $_encoderSet = array();
+    protected $_converterSet = array();
 
     /**
-     * Encode
+     * Convert
      *
      * @todo implements handle Diggin_Spider_Document
      *
@@ -45,7 +45,7 @@ class Diggin_Http_Response_Charset_Front_UrlRegex
      * @param array $remains
      * @return mixed string|array
      */
-    public function encode($document, $remains = null)
+    public function convert($document, $remains = null)
     {
         if (is_array($document)) {
             $url = $document['url'];
@@ -59,63 +59,63 @@ class Diggin_Http_Response_Charset_Front_UrlRegex
         }
         // and remaind args will use backup var.
 
-        if ($encoder = $this->_checkMatch((string)$url)) {
-            if (is_string($encoder)) {
-                $encoder = $this->_loadEncoder($encoder);
+        if ($converter = $this->_checkMatch((string)$url)) {
+            if (is_string($converter)) {
+                $converter = $this->_loadConverter($converter);
             }
-            return $encoder->encode($content, $remains);
+            return $converter->convert($content, $remains);
         }
 
-        return $this->getDefaultEncoder()->encode($content, $remains);
+        return $this->getDefaultConverter()->convert($content, $remains);
     }
 
     /**
-     * add Encoder
+     * add Converter
      * $pattern should be preg-regex
      *
      * @param string $pattern
-     * @param mixed string|Diggin_Http_Response_Charset_Encoder_EncoderInterface
+     * @param mixed string|Diggin_Http_Response_Charset_Converter_ConverterInterface
      * @return Diggin_Http_Response_Charset_Front_UrlRegex
      */
-    public function addEncoder($pattern, $encoder)
+    public function addConverter($pattern, $converter)
     {
-        $this->_encoderSet[$pattern] = $encoder;
+        $this->_converterSet[$pattern] = $converter;
 
         return $this;
     }
 
-    public function getEncoderSet()
+    public function getConverterSet()
     {
-        return $this->_encoderSet;
+        return $this->_converterSet;
     }
 
     protected function _checkMatch($url)
     {
-        foreach ($this->getEncoderSet() as $pattern => $encoder) {
+        foreach ($this->getConverterSet() as $pattern => $converter) {
             if (preg_match($pattern, $url)) {
-                return $encoder;
+                return $converter;
             }
         }
     }
 
-    protected function _loadEncoder($encoder)
+    protected function _loadConverter($converter)
     {
-        if (!class_exists($encoder)) {
+        if (!class_exists($converter)) {
             require_once 'Zend/Loader.php';
-            $encoder = Zend_Loader::loadClass($encoder);
+            $converter = Zend_Loader::loadClass($converter);
         }
 
-        return new $encoder;
+        return new $converter;
     }
 
-    final static public function getDefaultEncoder()
+    final static public function getDefaultConverter()
     {
-        if (!self::$_defaultEncoder) {
-            require_once 'Diggin/Http/Response/Charset/Encoder/Html.php';
-            self::$_defaultEncoder = new Diggin_Http_Response_Charset_Encoder_Html;
+        if (!self::$_defaultConverter) {
+            require_once 'Diggin/Http/Response/Charset/Converter/Html.php';
+            self::$_defaultConverter = new Diggin_Http_Response_Charset_Converter_Html;
         }
 
-        return self::$_defaultEncoder;
+        return self::$_defaultConverter;
     }
 
 }

@@ -22,9 +22,9 @@ $adapter->setResponse(
     $html);
 $client = new Zend_Http_Client($url = 'http://www.yahoo.jp', array('adapter' => $adapter));
 
-$encoder = new Diggin_Http_Response_Charset_Encoder_Html;
+$encoder = new Diggin_Http_Response_Charset_Converter_Html;
 $response = $client->request();
-var_dump($encoder->encode(array('body' => $response->getBody(), 
+var_dump($encoder->convert(array('body' => $response->getBody(), 
                                 'content-type' => $response->getHeader('content-type'))
                           , array(mb_convert_encoding('ああ', 'Shift-JIS', 'UTF-8')))
          );

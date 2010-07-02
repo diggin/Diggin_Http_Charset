@@ -20,7 +20,8 @@
  * ---------------------------------------------------------------------
  */
 
-interface Diggin_Http_Response_Charset_Encoder_EncoderInterface
+interface Diggin_Http_Response_Charset_Front_ConvertInterface
 {
-    public function encode($content, $remains = null);
+    public function convert($content, $remains = null);
 }
+

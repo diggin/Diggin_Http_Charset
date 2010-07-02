@@ -5,7 +5,7 @@ require_once 'Zend/Loader/Autoloader.php';
 Zend_Loader_Autoloader::getInstance()->setFallbackAutoloader(true);
 require_once 'Diggin/Http/Response/Charset/Front/UrlRegex.php';
 
-class My_Encoder extends Diggin_Http_Response_Charset_Encoder_EncoderAbstract
+class My_Converter extends Diggin_Http_Response_Charset_Converter_ConverterAbstract
 {
     const URL_REGEX = '#^http://github.com/*#s';
 
@@ -26,13 +26,13 @@ class My_Encoder extends Diggin_Http_Response_Charset_Encoder_EncoderAbstract
 }
 
 $front = new Diggin_Http_Response_Charset_Front_UrlRegex;
-$front->addEncoder(My_Encoder::URL_REGEX, new My_Encoder);
+$front->addConverter(My_Converter::URL_REGEX, new My_Converter);
 
 $client = new Zend_Http_Client($argv[1]);
 $response = $client->request();
 
 $content = array('body' => $response->getBody(), 
                  'content-type' => $response->getHeader('content-type'));
-$ret = $front->encode(array('url' => $client->getUri(), 'content' => $content));
+$ret = $front->convert(array('url' => $client->getUri(), 'content' => $content));
 
 var_dump(trim(strip_tags($ret)));
