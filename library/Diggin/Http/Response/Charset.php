@@ -22,18 +22,15 @@
 
 final class Diggin_Http_Response_Charset
 {
-    final private function __construct()
-    {}
+    final private function __construct(){}
 
     final public static function wrapResponse($response, $url = null)
     {
         if ($response instanceof Zend_Http_Response) {
 
             $headers = $response->getHeaders();
-            // Cut original Header's Charset
-            if (isset($headers['Content-type'])) {
-                $headers['Content-type'] = trim(preg_replace('/charset=[A-Za-z0-9-_]+;*/i', '', $headers['Content-type']));
-            }
+
+            $headers = self::clearHeadersCharset($headers);
             
             require_once 'Diggin/Http/Response/Charset/Wrapper/Zf.php';
             $response = new Diggin_Http_Response_Charset_Wrapper_Zf($response->getStatus(), 
@@ -48,5 +45,21 @@ final class Diggin_Http_Response_Charset
             require_once 'Diggin/Http/Response/Charset/Exception.php';
             throw new Diggin_Http_Response_Charset_Exception('Unknown Object Type..');
         }
+    }
+
+    /**
+     * Cut original Header's Charset
+     * note: Zend_Http_Response's Headers key is ucwords(strtolower)..
+     *
+     * @param array $headers (supported only Zend_Http_Response's Headers)
+     * @return array
+     */
+    final public static function clearHeadersCharset($headers)
+    {
+        if (isset($headers['Content-type'])) {
+            $headers['Content-type'] = trim(preg_replace('/charset=[A-Za-z0-9-_]+;*/i', '', $headers['Content-type']));
+        }
+
+        return $headers;
     }
 }
