@@ -29,7 +29,7 @@ class Diggin_Http_Response_Charset_Front_UrlRegex
     /**
      * @var Diggin_Http_Response_Charset_Converter_ConverterInterface
      */
-    static private $_defaultConverter;
+    private $_defaultConverter;
 
     /**
      * @var array
@@ -108,14 +108,14 @@ class Diggin_Http_Response_Charset_Front_UrlRegex
         return new $converter;
     }
 
-    final static public function getDefaultConverter()
+    final public function getDefaultConverter()
     {
-        if (!self::$_defaultConverter) {
+        if (!$this->_defaultConverter) {
             require_once 'Diggin/Http/Response/Charset/Converter/Html.php';
-            self::$_defaultConverter = new Diggin_Http_Response_Charset_Converter_Html;
+            $this->_defaultConverter = new Diggin_Http_Response_Charset_Converter_Html;
         }
 
-        return self::$_defaultConverter;
+        return $this->_defaultConverter;
     }
 
 }

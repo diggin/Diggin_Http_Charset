@@ -47,6 +47,18 @@ abstract class Diggin_Http_Response_Charset_Converter_ConverterAbstract
         
         $encoding_from = $this->_encodingFrom($body, $ctype);
         $body = $this->_initBody($body);
+        
+        // if not avilable for mbstring, using iconv 
+        if (!in_array($encoding_from, mb_list_encodings())) {
+            $body = @iconv($encoding_from, 'UTF-8', $body);
+            if (isset($remains)) {
+                foreach ($remains as $k => $v) {
+                    $remains[$k] = @iconv($encoding_from, 'UTF-8', $v);
+                }
+                return array($body, $remains);
+            }
+            return $body;
+        }
 
         if (isset($remains)) {
             @mb_convert_variables('UTF-8', $encoding_from, $body, $remains);

@@ -57,7 +57,7 @@ final class Diggin_Http_Response_Charset
     final public static function clearHeadersCharset($headers)
     {
         if (isset($headers['Content-type'])) {
-            $headers['Content-type'] = trim(preg_replace('/charset=[A-Za-z0-9-_]+;*/i', '', $headers['Content-type']));
+            $headers['Content-type'] = trim(preg_replace('/;\scharset=[A-Za-z0-9-_]+/i', '', $headers['Content-type']));
         }
 
         return $headers;

@@ -105,19 +105,20 @@ class Diggin_Http_Response_Charset_Detector_Html
      * @param string $responseBody
      * @param string $contentType
      * @return string $encoding
+     * @throw Diggin_Http_Response_Charset_Detector_Exception
      */
     public function detect($responseBody, $contentType = null)
     {
         $encoding = false;
         if (isset($contentType)) {
-            $encoding = self::_getCharsetFromCType($contentType);
+            $encoding = $this->_getCharsetFromCType($contentType);
         }
         if ((!$encoding or (!$this->_config['accept_header_ctype']))
                 and preg_match_all('/<meta\b[^>]*?>/si', $responseBody, $matches)) {
             foreach ($matches[0] as $value) {
-                if (strtolower(self::_getAttribute('http-equiv', $value)) == 'content-type'
-                    and false !== $encoding = self::_getAttribute('content', $value)) {
-                    $encoding = self::_getCharsetFromCType($encoding);
+                if (strtolower($this->_getAttribute('http-equiv', $value)) == 'content-type'
+                    and false !== $encoding = $this->_getAttribute('content', $value)) {
+                    $encoding = $this->_getCharsetFromCType($encoding);
                     break;
                 }
             }
@@ -126,7 +127,7 @@ class Diggin_Http_Response_Charset_Detector_Html
         /*
          * detect character encoding
          */
-        if((in_array($encoding, $this->getListAgainstMime())) or (!$encoding or $this->_config['force_detect_body'])) {
+        if ((in_array($encoding, $this->getListAgainstMime())) or (!$encoding or $this->_config['force_detect_body'])) {
             $detect = @mb_detect_encoding($responseBody, $this->getDetectOrder());
         
             if (in_array($encoding, $this->getListAgainstMime())) {
@@ -151,7 +152,7 @@ class Diggin_Http_Response_Charset_Detector_Html
         //if ($wellknown = array_search($encoding, array('HZ-GB-2312' => 'GB-2312'))) {
         //  return $wellknown;
         //}
-        
+
         return $encoding;
     }
 
@@ -161,7 +162,7 @@ class Diggin_Http_Response_Charset_Detector_Html
      * @param  string  $string
      * @return mixed
      */
-    protected static function _getCharsetFromCType($string)
+    protected function _getCharsetFromCType($string)
     {
         $array = explode(';', $string);
         if (isset($array[1])) {
@@ -171,10 +172,13 @@ class Diggin_Http_Response_Charset_Detector_Html
                 if (preg_match('/^UTF-?8$/i', $charset)) {
                     return 'UTF-8';
                 } else {
-                    return @mb_preferred_mime_name($charset);
+                    // force preferred_mime_name in CharsetFromCType
+                    $preferred = @mb_preferred_mime_name($charset);
+                    return ($preferred) ? $preferred : $charset;
                 }
             }
         }
+
         return false;
     }
 
@@ -185,7 +189,7 @@ class Diggin_Http_Response_Charset_Detector_Html
      * @param string $string:
      * @return mixed
      */
-    protected static function _getAttribute($name, $string)
+    protected function _getAttribute($name, $string)
     {
         $search = "'[\s\'\"]\b".$name."\b\s*=\s*([^\s\'\">]+|\'[^\']+\'|\"[^\"]+\")'si";
         if (preg_match($search, $string, $matches)) {
