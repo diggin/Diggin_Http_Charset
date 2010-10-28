@@ -9,5 +9,4 @@ require_once 'PHPUnit/TextUI/TestRunner.php';
 require_once 'PHPUnit/Util/Filter.php';
 
 error_reporting( E_ALL | E_STRICT );
-
-set_include_path(dirname(dirname(__FILE__)).'/src/'. PATH_SEPARATOR. get_include_path());
+set_include_path(dirname(dirname(__FILE__)).'/library/'. PATH_SEPARATOR. get_include_path());

@@ -45,8 +45,8 @@ abstract class Diggin_Http_Response_Charset_Converter_ConverterAbstract
             $body = $content;
         }
         
-        $encoding_from = $this->_encodingFrom($body, $ctype);
         $body = $this->_initBody($body);
+        $encoding_from = $this->_encodingFrom($body, $ctype);
         
         // if not avilable for mbstring, using iconv 
         if (!in_array($encoding_from, mb_list_encodings())) {
@@ -74,6 +74,12 @@ abstract class Diggin_Http_Response_Charset_Converter_ConverterAbstract
     
     protected function _initBody($body)
     {
+        /**
+         * Remove BOM & NULLs.
+         */
+        $body = preg_replace('/^\xef\xbb\xbf/', '' , $body);
+        $body = str_replace("\x0", '', $body);
+
         return $body;
     }
 }

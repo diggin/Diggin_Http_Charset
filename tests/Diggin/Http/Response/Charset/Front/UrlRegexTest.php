@@ -46,6 +46,8 @@ class Diggin_Http_Response_Charset_Front_UrlRegexTest_Converter
 {
     protected function _initBody($body)
     {
+        $body = parent::_initBody($body);
+
         $utf8 = substr($body, 0 , 10);
         $re_encoded = mb_convert_encoding(substr($body, 10), 'UTF-8', 'SJIS-win');
         return $utf8 . $re_encoded;
