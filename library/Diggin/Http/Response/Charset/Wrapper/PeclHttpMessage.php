@@ -20,16 +20,13 @@
  * ---------------------------------------------------------------------
  */
 
-class Diggin_Http_Response_Charset_Wrapper_Zf extends Zend_Http_Response 
+class Diggin_Http_Response_Charset_Wrapper_PeclHttpMessage extends HttpMessage
 {
     /**
      * @var Diggin_Http_Response_Charset_Front_ConvertInterface
      */
     private $_charsetfront;
 
-    /**
-     * @var string
-     */
     private $_url;
 
     public function setCharsetFront(Diggin_Http_Response_Charset_Front_ConvertInterface $charsetfront)
@@ -46,31 +43,10 @@ class Diggin_Http_Response_Charset_Wrapper_Zf extends Zend_Http_Response
 
         return $this->_charsetfront;
     }
-    
-    public function getHeaders()
-    {
-        $headers = parent::getHeaders();
-        return Diggin_Http_Response_Charset::clearHeadersCharset($headers);
-    }
-
-    public function getHeader($header)
-    {
-        $value = parent::getHeader($header);
-        if ('Content-type' == ucwords(strtolower($header))) {
-            $args = func_get_args();
-            if (isset($args[1]) && true === $args[1]) {
-                return parent::getHeader($header);
-            }
-
-            return Diggin_Http_Response_Charset::clearHeaderCharset($value);
-        }
-
-        return $value;
-    }
 
     public function getBody()
     {
-        $content = array('body' => parent::getBody(), 'content-type' => $this->getHeader('Content-type', true));
+        $content = array('body' => parent::getBody(), 'content-type' => $this->getHeader('content-type'));
         $document = array('url' => $this->getUrl(), 'content' => $content);
         
         return $this->getCharsetFront()->convert($document);
@@ -85,4 +61,5 @@ class Diggin_Http_Response_Charset_Wrapper_Zf extends Zend_Http_Response
     {
         return $this->_url;
     }
+
 }

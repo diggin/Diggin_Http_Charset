@@ -28,19 +28,32 @@ final class Diggin_Http_Response_Charset
     {
         if ($response instanceof Zend_Http_Response) {
 
-            $headers = $response->getHeaders();
-
-            $headers = self::clearHeadersCharset($headers);
-            
             require_once 'Diggin/Http/Response/Charset/Wrapper/Zf.php';
             $response = new Diggin_Http_Response_Charset_Wrapper_Zf($response->getStatus(), 
-                                                $headers,
+                                                $response->getHeaders(),
                                                 $response->getRawBody(),
                                                 $response->getVersion(),
                                                 $response->getMessage());
             $response->setUrl($url);
 
             return $response;
+        } else if ($response instanceof HttpMessage) {
+            if (HTTP_MSG_RESPONSE !== $response->getType()) {
+                throw new Exception('Invalid Type');
+            }
+
+            require_once 'Diggin/Http/Response/Charset/Wrapper/PeclHttpMessage.php';
+            $message = new Diggin_Http_Response_Charset_Wrapper_PeclHttpMessage;
+            $message->setType($response->getType());
+            $message->setBody($response->getBody());
+            $message->setHeaders($response->getHeaders());
+            $message->setHttpVersion($response->getHttpVersion());
+            $message->setResponseCode($response->getResponseCode());
+            $message->setResponseStatus($response->getResponseStatus());
+
+            $message->setUrl($url);
+
+            return $message;
         } else {
             require_once 'Diggin/Http/Response/Charset/Exception.php';
             throw new Diggin_Http_Response_Charset_Exception('Unknown Object Type..');
@@ -57,9 +70,14 @@ final class Diggin_Http_Response_Charset
     final public static function clearHeadersCharset($headers)
     {
         if (isset($headers['Content-type'])) {
-            $headers['Content-type'] = trim(preg_replace('/;\scharset=[A-Za-z0-9-_]+/i', '', $headers['Content-type']));
+            $headers['Content-type'] = self::clearHeaderCharset($headers['Content-type']);
         }
 
         return $headers;
+    }
+
+    final public static function clearHeaderCharset($header)
+    {
+        return trim(preg_replace('/;\scharset=[A-Za-z0-9-_]+/i', '', $header));
     }
 }

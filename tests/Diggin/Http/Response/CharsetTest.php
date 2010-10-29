@@ -26,6 +26,8 @@ $html = <<<HTML
 </body>
 HTML;
         $sjis = mb_convert_encoding($html, 'SJIS-win', 'UTF-8');
+
+
         require_once 'Zend/Http/Response.php';
         $response = Zend_Http_Response::fromString("$header\r\n\r\n$sjis");
         $wrap = Diggin_Http_Response_Charset::wrapResponse($response);
@@ -33,6 +35,38 @@ HTML;
         
         $this->assertEquals($html, $wrap->getBody());
 
+    }
+
+    public function testWrapperPeclHttpMessage()
+    {
+        $header = "HTTP/1.1 200 OK" ."\r\n".
+               "Content-Type: text/html; charset=Shift-JIS";
+$html = <<<HTML
+<html lang="ja" xml:lang="ja" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=Shift-JIS" http-equiv="Content-Type" />
+</head>
+<body>
+<!--① ㈱① ㈱-->ああ
+</body>
+HTML;
+        $sjis = mb_convert_encoding($html, 'SJIS-win', 'UTF-8');
+
+        $message = new HttpMessage;
+        $message->setType(2);
+        $message->setBody($sjis);
+        $message->setHeaders(array('Content-type' => 'text/html; charset=Shift-JIS'));
+        $message->setHttpVersion(1.1);
+        $message->setResponseCode(200);
+        $message->setResponseStatus('OK');
+
+        $wrap = Diggin_Http_Response_Charset::wrapResponse($message);
+        $this->assertTrue($wrap instanceof HttpMessage);
+        
+        $this->assertEquals($html, $wrap->getBody());
+
+        //var_dump($message->getBody());
+        //var_dump($wrap->getBody());
     }
 
     public function testClearHeadersCharset()
