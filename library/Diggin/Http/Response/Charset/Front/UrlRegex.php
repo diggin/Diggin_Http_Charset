@@ -21,7 +21,6 @@
  */
 
 require_once 'Diggin/Http/Response/Charset/Front/ConvertInterface.php';
-require_once 'Diggin/Http/Response/Charset/Converter/ConverterInterface.php';
 
 class Diggin_Http_Response_Charset_Front_UrlRegex 
     implements Diggin_Http_Response_Charset_Front_ConvertInterface
