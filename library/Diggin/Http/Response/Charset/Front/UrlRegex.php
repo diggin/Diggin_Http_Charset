@@ -38,8 +38,6 @@ class Diggin_Http_Response_Charset_Front_UrlRegex
     /**
      * Convert
      *
-     * @todo implements handle Diggin_Spider_Document
-     *
      * @param array $document
      * @param array $remains
      * @return mixed string|array
@@ -59,15 +57,14 @@ class Diggin_Http_Response_Charset_Front_UrlRegex
         // and remaind args will use backup var.
 
         if ($converter = $this->_checkMatch((string)$url)) {
+            if (is_callable($converter)) {
+                return call_user_func_array($converter, array($content, $remains));
+            }
             if (is_string($converter)) {
                 $converter = $this->_loadConverter($converter);
             }
             
-            if ($converter instanceof Diggin_Http_Response_Charset_Converter_ConverterInterface) {
-                return $converter->convert($content, $remains);
-            } else if (is_callable($converter)) {
-                return call_user_func_array($converter, array($content, $remains));
-            }
+            return $converter->convert($content, $remains);
         }
 
         return $this->getDefaultConverter()->convert($content, $remains);
@@ -83,6 +80,14 @@ class Diggin_Http_Response_Charset_Front_UrlRegex
      */
     public function addConverter($pattern, $converter)
     {
+        if (!is_callable($converter) and
+            !($converter instanceof Diggin_Http_Response_Charset_Converter_ConverterInterface) and
+            !(is_string($converter) 
+              and $this->_loadConverter($converter) instanceof Diggin_Http_Response_Charset_Converter_ConverterInterface)) {
+            require_once 'Diggin/Http/Response/Charset/Front/Exception.php';
+            throw new Diggin_Http_Response_Charset_Front_Exception('Invalid Argument');
+        }
+
         $this->_converterSet[$pattern] = $converter;
 
         return $this;
