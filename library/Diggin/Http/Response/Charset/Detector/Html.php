@@ -32,7 +32,23 @@ class Diggin_Http_Response_Charset_Detector_Html
     private $_config = array('accept_header_ctype' => true,
                              'force_detect_body' => false,
                              'detect_prefer_mime' => false);
-    
+
+    public function setConfig($config = array())
+    {  
+        if ($config instanceof Zend_Config) {
+            $config = $config->toArray();
+        } elseif (! is_array($config)) {
+            require_once 'Diggin/Http/Response/Charset/Detector/Exception.php';
+            throw new Diggin_Http_Response_Charset_Detector_Exception('Array or Zend_Config object expected, got ' . gettype($config));
+        }
+
+        foreach ($config as $k => $v) {
+            $this->_config[strtolower($k)] = $v;
+        }
+
+        return $this;
+    }
+
     /**
      * Set detect-order
      *
