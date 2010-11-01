@@ -37,6 +37,12 @@ class Diggin_Http_Response_Charset_Front_UrlRegexTest extends PHPUnit_Framework_
         $ret = $front->convert(array('url' => 'http://example.com/bb/1', 'content' => array('body' => $mixed)));
         $this->assertEquals('01234<body>①', $ret);
 
+        $front->addConverter('#http://example.com/func/*#', 
+                             function($content) {return mb_convert_encoding($content['body'], 'UTF-8', 'Shift-JIS');});
+        $ret = $front->convert(array('url' => 'http://example.com/func/1', 
+                                     'content' => array('body' => mb_convert_encoding('あいうえお', 'Shift-JIS', 'UTF-8'))));
+        $this->assertEquals('あいうえお', $ret);
+
     }
 
 }
