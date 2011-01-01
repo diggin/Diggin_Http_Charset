@@ -95,8 +95,14 @@ HTML;
 
         $ret = $converter->convert(array('body' => $tis620, 
                                           'content-type' => 'text/html; charset=TIS-620'));
-
         $this->assertEquals($html, $ret);
+
+        $remain = $tis620;
+
+        list($ret, $ret_remain) = $converter->convert(array('body' => $tis620, 
+                                          'content-type' => 'text/html; charset=TIS-620'), array($remain));
+        $this->assertEquals($html, $ret);
+        $this->assertEquals($html, current($ret_remain));
 
     }
 }

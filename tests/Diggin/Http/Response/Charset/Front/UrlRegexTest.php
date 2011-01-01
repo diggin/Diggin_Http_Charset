@@ -1,6 +1,5 @@
 <?php
 
-require_once 'PHPUnit/Framework.php';
 require_once 'Diggin/Http/Response/Charset/Front/UrlRegex.php';
 
 class Diggin_Http_Response_Charset_Front_UrlRegexTest extends PHPUnit_Framework_TestCase
@@ -20,6 +19,9 @@ class Diggin_Http_Response_Charset_Front_UrlRegexTest extends PHPUnit_Framework_
         $front = new Diggin_Http_Response_Charset_Front_UrlRegex;
         $content = array('body' => $iso8859_1, 
                           'content-type' => $contentType);
+
+        $ret = $front->convert('e');
+        $this->assertEquals('e', $ret, 'arg string convert');
 
         $ret = $front->convert(array('url' => 'http://example.com/aa', 'content' => $content));
         $this->assertEquals('é', $ret);

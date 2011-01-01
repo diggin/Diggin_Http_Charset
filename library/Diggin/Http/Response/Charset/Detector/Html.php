@@ -74,7 +74,7 @@ class Diggin_Http_Response_Charset_Detector_Html
     }
 
     /**
-     * Get list - Don't use mb_preferred_mime_name()
+     * Get list - against mb_preferred_mime_name()
      * 
      * @return array
      */

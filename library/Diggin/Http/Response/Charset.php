@@ -24,6 +24,14 @@ final class Diggin_Http_Response_Charset
 {
     final private function __construct(){}
 
+    /**
+     * wrap response objects
+     *  Zend_Http_Response, HttpMessage
+     *
+     *  @param mixed object to wrap
+     *  @param string
+     *  @return mixed
+     */
     final public static function wrapResponse($response, $url = null)
     {
         if ($response instanceof Zend_Http_Response) {
