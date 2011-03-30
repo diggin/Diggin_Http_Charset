@@ -1,8 +1,5 @@
 <?php
 
-require_once 'PHPUnit/Framework.php';
-require_once 'Diggin/Http/Response/Charset/Converter/Fixedfrom.php';
-
 class Diggin_Http_Response_Charset_Converter_FixedfromTest extends PHPUnit_Framework_TestCase
 {
     protected function setUp()

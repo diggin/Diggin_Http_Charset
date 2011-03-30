@@ -1,5 +1,4 @@
 <?php
-require_once 'Diggin/Http/Response/Charset/Detector/Html.php';
 
 class Diggin_Http_Response_Charset_Detector_HtmlTest extends PHPUnit_Framework_TestCase
 {

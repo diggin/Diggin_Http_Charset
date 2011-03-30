@@ -1,8 +1,5 @@
 <?php
 
-require_once 'PHPUnit/Framework.php';
-require_once 'Diggin/Http/Response/Charset/Converter/Html.php';
-
 class Diggin_Http_Response_Charset_Converter_HtmlTest extends PHPUnit_Framework_TestCase
 {
 
