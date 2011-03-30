@@ -1,7 +1,7 @@
 <?php
 
 // simply usage with file_get_contents()
-// This example not require any library (PEAR, Zend Framework..)
+// This example not require any other library (PEAR, Zend Framework..)
 
 if(!isset($argv[1])) {
     $url = 'http://d.hatena.ne.jp/miyagawa/';
@@ -22,7 +22,7 @@ var_dump($cType = detect_contenttype_from_http_response_header($http_response_he
 
 
 <?php
-set_include_path(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))).'/library/'. PATH_SEPARATOR. get_include_path());
+set_include_path(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))).'/library/');
 require_once 'Diggin/Http/Response/Charset/Front/UrlRegex.php';
 $front = new Diggin_Http_Response_Charset_Front_UrlRegex;
 
