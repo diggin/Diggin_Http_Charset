@@ -47,7 +47,8 @@ final class Diggin_Http_Response_Charset
             return $response;
         } else if ($response instanceof HttpMessage) {
             if (HTTP_MSG_RESPONSE !== $response->getType()) {
-                throw new Exception('Invalid Type');
+                require_once 'Diggin/Http/Response/Charset/Exception.php';
+                throw new Diggin_Http_Response_Charset_Exception('Invalid Message Type :'. $response->getType());
             }
 
             require_once 'Diggin/Http/Response/Charset/Wrapper/PeclHttpMessage.php';

@@ -1,6 +1,5 @@
 <?php
 
-require_once 'PHPUnit/Framework.php';
 require_once 'Diggin/Http/Response/Charset.php';
 
 class Diggin_Http_Response_CharsetTest extends PHPUnit_Framework_TestCase
@@ -65,9 +64,29 @@ HTML;
         
         $this->assertEquals($html, $wrap->getBody());
 
-        //var_dump($message->getBody());
-        //var_dump($wrap->getBody());
+        // check message type
+        try {
+            $message->setType(1);
+            Diggin_Http_Response_Charset::wrapResponse($message);
+            $this->fail('message type should not be 1');
+        } catch (Exception $e) {
+            $this->assertTrue($e instanceof Diggin_Http_Response_Charset_Exception);
+        }
+
     }
+
+    public function testWrapUnknownObject()
+    {
+        $unknown = new stdClass;
+        
+        try {
+            Diggin_Http_Response_Charset::wrapResponse($unknown);
+            $this->fail('wrapResponse method should be throw Exception');
+        } catch (Exception $e) {
+            $this->assertTrue($e instanceof Diggin_Http_Response_Charset_Exception);
+        }
+    }
+
 
     public function testClearHeadersCharset()
     {

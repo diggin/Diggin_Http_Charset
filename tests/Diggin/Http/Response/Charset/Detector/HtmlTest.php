@@ -1,6 +1,4 @@
 <?php
-
-require_once 'PHPUnit/Framework.php';
 require_once 'Diggin/Http/Response/Charset/Detector/Html.php';
 
 class Diggin_Http_Response_Charset_Detector_HtmlTest extends PHPUnit_Framework_TestCase
@@ -10,12 +8,10 @@ class Diggin_Http_Response_Charset_Detector_HtmlTest extends PHPUnit_Framework_T
 
     protected function setUp()
     {
-        //$this->detectOrder = mb_detect_order();
     }
 
     protected function tearDown()
     {
-        //mb_detect_order($this->detectOrder);
     }
 
     /**
@@ -35,11 +31,16 @@ class Diggin_Http_Response_Charset_Detector_HtmlTest extends PHPUnit_Framework_T
         //if parameter has non-AlNum, must detect as UTF-8
         $this->assertEquals('UTF-8',
                             $detector->detect('あ1ab'));
+
+        $detector->setConfig(array('detect_prefer_mime' => true));
+        $this->assertEquals('Shift_JIS',
+                            $detector->detect(pack("C2", 0x87, 0x40)));
     }
     
     public function testDetectWithMetaTag() 
     {
         $detector = new Diggin_Http_Response_Charset_Detector_Html();
+        $detector->setConfig(array('accept_header_ctype' => true));
         $sjis_text = mb_convert_encoding('あ', 'Shift_JIS', 'UTF-8');
 
 $body = <<<BODY
