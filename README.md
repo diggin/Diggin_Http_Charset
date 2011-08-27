@@ -1,40 +1,46 @@
-Diggin_Http_Response_Charset
+Diggin_Http_Charset
 ============================
 
-*offers converting charset AUTO and wrapping response object.*
+*OFFERS detect & converting ALL response charset to UTF-8*
+Most powerfull for MOJIBAKE.
+
+(several charset - SJIS-win, TIS-620 and others..)
 
 This library aims to used in web-scraping.
 
 Requirements
 ------------
-  - PHP 5.2 or over
+  - PHP 5.3 or over
   - mbstring and iconv
-  - Zend Framework 1.8 or over (optional)
 
 Usage
 -----
 wrap response object:
+    use Diggin\Http\Charset\WrapperFactory;
     $client = new Zend_Http_Client($url);
     $response = $client->request();
-    Diggin_Http_Response_Charset::wrapResponse($response);
+    WrapperFactory::wrapResponse($response);
 
-
-Please see demos/Diggin/Http/Response/Charset .
+Please see demos/Diggin/Http/Charset .
 
 Technical Information
 ---------------------
-Diggin_Http_Response_Charset is based on HTMLScraping.
+Diggin_Http_Charset is based on HTMLScraping.
 
   - http://www.rcdtokyo.com/etc/htmlscraping/
 
 License
 -------
-Diggin_Http_Response_Charset is licensed under LGPL(GNU Lesser General Public License).
+Diggin_Http_Charset is licensed under LGPL(GNU Lesser General Public License).
 
-Similar libray
+Similar library
 --------------
 - perl : HTTP::Response::Encoding
   - http://search.cpan.org/dist/HTTP-Response-Encoding/
   - http://blog.livedoor.jp/dankogai/archives/50811793.html
 - python : Universal Encoding Detector
   - http://chardet.feedparser.org/
+
+FOR PHP5.2.x users
+----------------
+php5.2 branch is also available.

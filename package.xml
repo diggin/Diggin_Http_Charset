@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package version="2.1" xmlns="http://pear.php.net/dtd/package-2.1" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.1     http://pear.php.net/dtd/package-2.1.xsd">
+ <name>Diggin_Http_Charset</name>
+ <channel>pear.diggin.musicrider.com</channel>
+ <summary>Package Diggin_Http_Charset summary.
+</summary>
+ <description>Diggin_Http_Charset</description>
+ <lead>
+  <name>sasezaki</name>
+  <user>sasezaki</user>
+  <email>sasezaki@gmail.com</email>
+  <active>yes</active>
+ </lead>
+ <date>2011-08-28</date>
+ <time>00:45:50</time>
+ <version>
+  <release>0.1.0</release>
+  <api>0.1.0</api>
+ </version>
+ <stability>
+  <release>alpha</release>
+  <api>alpha</api>
+ </stability>
+ <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
+ <notes>Package Diggin_Http_Charset release notes for version 0.1.0.
+
+Package Diggin_Http_Charset API release notes for version 0.1.0.</notes>
+ <contents>
+  <dir name="/">
+   <dir name="src" baseinstalldir="/">
+    <dir name="Diggin">
+     <dir name="Http">
+      <dir name="Charset">
+       <dir name="Converter">
+        <file role="php" name="AbstractConverter.php"/>
+        <file role="php" name="FixedfromConverter.php"/>
+        <file role="php" name="HtmlConverter.php"/>
+       </dir>
+       <dir name="Detector">
+        <file role="php" name="HtmlDetector.php"/>
+       </dir>
+       <dir name="Exception">
+        <file role="php" name="DetectException.php"/>
+        <file role="php" name="InvalidArgumentException.php"/>
+       </dir>
+       <dir name="Front">
+        <file role="php" name="DocumentConverter.php"/>
+        <file role="php" name="UrlRegex.php"/>
+       </dir>
+       <dir name="Wrapper">
+        <file role="php" name="PeclHttpMessageWrapper.php"/>
+        <file role="php" name="ZF1Wrapper.php"/>
+       </dir>
+       <file role="php" name="Converter.php"/>
+       <file role="php" name="Exception.php"/>
+       <file role="php" name="Filter.php"/>
+       <file role="php" name="WrapperFactory.php"/>
+      </dir>
+     </dir>
+    </dir>
+   </dir>
+   <dir name="tests" baseinstalldir="/">
+    <dir name="Diggin">
+     <dir name="Http">
+      <dir name="Charset">
+       <dir name="Converter">
+        <file role="test" name="FixedfromConverterTest.php"/>
+        <file role="test" name="HtmlConverterTest.php"/>
+       </dir>
+       <dir name="Detector">
+        <file role="test" name="HtmlDetectorTest.php"/>
+       </dir>
+       <dir name="Front">
+        <file role="test" name="UrlRegexTest.php"/>
+       </dir>
+       <file role="test" name="FilterTest.php"/>
+       <file role="test" name="WrapperFactoryTest.php"/>
+      </dir>
+     </dir>
+    </dir>
+    <dir name="vendor">
+     <dir name="Symfony2">
+      <file role="test" name="Response.php"/>
+     </dir>
+     <dir name="ZF1">
+      <dir name="Zend">
+       <dir name="Http">
+        <file role="test" name="Response.php"/>
+       </dir>
+      </dir>
+     </dir>
+     <file role="test" name="SplClassLoader.php"/>
+    </dir>
+    <file role="test" name="bootstrap.php"/>
+    <file role="test" name="phpunit.xml"/>
+   </dir>
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.3.0</min>
+   </php>
+   <pearinstaller>
+    <min>2.0.0a1</min>
+   </pearinstaller>
+   <extension>
+    <name>mbstring</name>
+   </extension>
+   <extension>
+    <name>iconv</name>
+   </extension>
+  </required>
+ </dependencies>
+ <phprelease/>
+</package>
