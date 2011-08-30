@@ -23,8 +23,12 @@
 /**
  * @namespace
  */
-namespace Diggin\Http\Charset;
+namespace Diggin\Http\Charset\Exception;
 
-interface Exception
+use Diggin\Http\Charset\Exception;
+
+class InvalidArgumentException
+    extends \InvalidArgumentException
+    implements Exception
 {}
 
