@@ -17,7 +17,6 @@ Usage
 1. wrap response object:
 <pre>
 use Diggin\Http\Charset\WrapperFactory;
-    
 $client = new Zend_Http_Client($url);
 $response = $client->request();
 $response = WrapperFactory::wrapResponse($response); // then, response getBody() is UTF-8.
