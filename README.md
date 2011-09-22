@@ -2,7 +2,10 @@ Diggin_Http_Charset
 ============================
 
 Automatically convert to UTF-8.
+
+
 Detecting based on header's charset & html meta charset.
+
 (handling several charset more carefully  - SJIS-win, TIS-620 and others..)
 
 This library aims to used in web-scraping.

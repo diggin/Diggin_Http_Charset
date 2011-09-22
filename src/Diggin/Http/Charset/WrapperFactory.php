@@ -49,6 +49,12 @@ final class WrapperFactory
             $response->setUrl($url);
 
             return $response;
+        } else if ($response instanceof \Symfony\Component\BrowserKit\Response){
+            $response = new Wrapper\Symfony2($response->getContent(),
+                                             $response->getStatus(), 
+                                             $response->getHeaders());
+            $response->setUrl($url);
+            return $response;
         } else if ($response instanceof \HttpMessage) {
             if (HTTP_MSG_RESPONSE !== $response->getType()) {
                 throw new \Exception('Invalid Message Type :'. $response->getType());
