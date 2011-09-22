@@ -1,10 +1,9 @@
 Diggin_Http_Charset
 ============================
 
-*OFFERS detect & converting ALL response charset to UTF-8*
-Most powerfull for MOJIBAKE.
-
-(several charset - SJIS-win, TIS-620 and others..)
+Automatically convert to UTF-8.
+Detecting based on header's charset & html meta charset.
+(handling several charset more carefully  - SJIS-win, TIS-620 and others..)
 
 This library aims to used in web-scraping.
 
@@ -15,13 +14,16 @@ Requirements
 
 Usage
 -----
-wrap response object:
-    use Diggin\Http\Charset\WrapperFactory;
-    $client = new Zend_Http_Client($url);
-    $response = $client->request();
-    WrapperFactory::wrapResponse($response);
+1. wrap response object:
+<pre>
+use Diggin\Http\Charset\WrapperFactory;
+    
+$client = new Zend_Http_Client($url);
+$response = $client->request();
+$response = WrapperFactory::wrapResponse($response); // then, response getBody() is UTF-8.
+</pre>
 
-Please see demos/Diggin/Http/Charset .
+Please see more at demos/Diggin/Http/Charset .
 
 Technical Information
 ---------------------
