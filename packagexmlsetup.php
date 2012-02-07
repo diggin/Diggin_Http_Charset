@@ -16,9 +16,12 @@ $package->license = $compatible->license
     = 'LGPL';
 $package->dependencies['required']->php = $compatible->dependencies['required']->php
     = '5.3.0';
+$package->summary = $compatible->summary
+    = "Detecting based on header's charset and html meta charset. Automatically convert to UTF-8.";
 $package->description = $compatible->description
-    = 'Diggin_Http_Charset';
-
+    = "Detecting based on header's charset and html meta charset. Automatically convert to UTF-8.";
+$package->notes = $compatible->notes
+    = "";
 
 $package->dependencies['required']->extension['mbstring']->save();
 $compatible->dependencies['required']->extension['mbstring']->save();

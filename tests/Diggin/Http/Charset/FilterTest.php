@@ -9,7 +9,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
         $header = "HTTP/1.1 200 OK" ."\r\n".
                "Content-Type: text/html; charset=Shift-JIS";
 
-        $inc = include_once dirname(dirname(dirname(__DIR__))).'/vendor/ZF1/Zend/Http/Response.php';
+        $inc = include_once dirname(dirname(dirname(dirname(__DIR__)))).'/vendor/ZF1/Zend/Http/Response.php';
 
         $response = \Zend_Http_Response::fromString("$header\r\n\r\nABC");
 

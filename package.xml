@@ -2,17 +2,16 @@
 <package version="2.1" xmlns="http://pear.php.net/dtd/package-2.1" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.1     http://pear.php.net/dtd/package-2.1.xsd">
  <name>Diggin_Http_Charset</name>
  <channel>pear.diggin.musicrider.com</channel>
- <summary>Package Diggin_Http_Charset summary.
-</summary>
- <description>Diggin_Http_Charset</description>
+ <summary>Detecting based on header's charset and html meta charset. Automatically convert to UTF-8.</summary>
+ <description>Detecting based on header's charset and html meta charset. Automatically convert to UTF-8.</description>
  <lead>
   <name>sasezaki</name>
   <user>sasezaki</user>
   <email>sasezaki@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2011-08-28</date>
- <time>00:45:50</time>
+ <date>2012-02-07</date>
+ <time>20:38:19</time>
  <version>
   <release>0.1.0</release>
   <api>0.1.0</api>
@@ -22,9 +21,7 @@
   <api>alpha</api>
  </stability>
  <license uri="http://www.gnu.org/copyleft/lesser.html">LGPL</license>
- <notes>Package Diggin_Http_Charset release notes for version 0.1.0.
-
-Package Diggin_Http_Charset API release notes for version 0.1.0.</notes>
+ <notes/>
  <contents>
   <dir name="/">
    <dir name="src" baseinstalldir="/">
@@ -49,7 +46,9 @@ Package Diggin_Http_Charset API release notes for version 0.1.0.</notes>
        </dir>
        <dir name="Wrapper">
         <file role="php" name="PeclHttpMessageWrapper.php"/>
+        <file role="php" name="Symfony2.php"/>
         <file role="php" name="ZF1Wrapper.php"/>
+        <file role="php" name="ZF2Wrapper.php"/>
        </dir>
        <file role="php" name="Converter.php"/>
        <file role="php" name="Exception.php"/>
@@ -77,19 +76,6 @@ Package Diggin_Http_Charset API release notes for version 0.1.0.</notes>
        <file role="test" name="WrapperFactoryTest.php"/>
       </dir>
      </dir>
-    </dir>
-    <dir name="vendor">
-     <dir name="Symfony2">
-      <file role="test" name="Response.php"/>
-     </dir>
-     <dir name="ZF1">
-      <dir name="Zend">
-       <dir name="Http">
-        <file role="test" name="Response.php"/>
-       </dir>
-      </dir>
-     </dir>
-     <file role="test" name="SplClassLoader.php"/>
     </dir>
     <file role="test" name="bootstrap.php"/>
     <file role="test" name="phpunit.xml"/>

@@ -7,7 +7,7 @@ class WrapperFactoryTest extends \PHPUnit_Framework_TestCase
 {
     public function testZF1()
     {
-        $inc = include_once dirname(dirname(dirname(__DIR__))).'/vendor/ZF1/Zend/Http/Response.php';
+        $inc = include_once dirname(dirname(dirname(dirname(__DIR__)))).'/vendor/ZF1/Zend/Http/Response.php';
 
         $header = "HTTP/1.1 200 OK" ."\r\n".
                   "Content-Type: text/html; charset=Shift-JIS";
@@ -30,7 +30,7 @@ EOF;
 
     public function testSymfony2BrowserKit()
     {
-        $inc = include_once dirname(dirname(dirname(__DIR__))).'/vendor/Symfony2/Response.php';
+        $inc = include_once dirname(dirname(dirname(dirname(__DIR__)))).'/vendor/Symfony2/Response.php';
 
         $html = <<<EOF
             <html lang="ja" xml:lang="ja" xmlns="http://www.w3.org/1999/xhtml">
