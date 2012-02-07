@@ -21,7 +21,7 @@ $package->summary = $compatible->summary
 $package->description = $compatible->description
     = "Detecting based on header's charset and html meta charset. Automatically convert to UTF-8.";
 $package->notes = $compatible->notes
-    = "";
+    = "developing";
 
 $package->dependencies['required']->extension['mbstring']->save();
 $compatible->dependencies['required']->extension['mbstring']->save();
