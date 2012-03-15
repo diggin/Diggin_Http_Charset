@@ -54,8 +54,18 @@ $body = <<<BODY
 <body>$sjis_text
 </body>
 BODY;
-        $this->assertEquals('SJIS-win',
-                            $detector->detect($body));
+        $this->assertEquals('SJIS-win', $detector->detect($body));
+
+        $eucjp_text = mb_convert_encoding('あ', 'EUC-JP', 'UTF-8');
+
+$html5 = <<<HTML5
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml">
+<head><meta charset="EUC-JP" /><title>HTML5</title></head>
+<body>$eucjp_text</body>
+</html>
+HTML5;
+        $this->assertEquals('eucJP-win', $detector->detect($html5));
     }
     
     /**

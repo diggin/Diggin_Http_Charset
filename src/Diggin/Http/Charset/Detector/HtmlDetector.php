@@ -142,6 +142,9 @@ class HtmlDetector
         if ((!$encoding or (!$this->_config['accept_header_ctype']))
                 and preg_match_all('/<meta\b[^>]*?>/si', $responseBody, $matches)) {
             foreach ($matches[0] as $value) {
+                if ($encoding = $this->_getAttribute('charset', $value)) {
+                    break;
+                }
                 if (strtolower($this->_getAttribute('http-equiv', $value)) == 'content-type'
                     and false !== $encoding = $this->_getAttribute('content', $value)) {
                     $encoding = $this->_getCharsetFromCType($encoding);
