@@ -42,35 +42,38 @@ class UrlRegex implements DocumentConverter
     /**
      * Convert Content(string, HTML&url set)
      *
-     * @param string|array $document
+     * @param string $body
+     * @param string $metadata 
+     *  expected 
+     *   case 1 metadata array :
+     *          ['content-type' => $var, 'url' => $url]
+     *   case 2 url as string :
+     *          'http://..'
      * @param array $remains
      * @return mixed string|array
      */
-    public function convert($document, $remains = null)
+    public function convert($body, $metadata = array(), $remains = null)
     {
-        if (is_array($document)) {
-            $url = $document['url'];
-            $content = $document['content'];
-        } elseif (is_string($document)) {
-            $url = '';
-            $content = $document;
-        } else {
-            throw new Exception\InvalidArgumentException('Invalid Argument'.__CLASS__. 'require string or array');
+        $url = false;
+        if (is_array($metadata) && isset($metadata['url'])) {
+            $url = $metadata['url'];
+            unset($metadata['url']); 
+        } else if (is_string($metadata)) {
+            $url = $metadata;
         }
-        // and remaind args will use backup var.
 
-        if ($converter = $this->_checkMatch((string)$url)) {
+        if ($url && $converter = $this->_checkMatch((string)$url)) {
             if (is_callable($converter)) {
-                return call_user_func_array($converter, array($content, $remains));
+                return call_user_func_array($converter, array($body, $metadata, $remains));
             }
             if (is_string($converter)) {
                 $converter = $this->_loadConverter($converter);
             }
             
-            return $converter->convert($content, $remains);
+            return $converter->convert($body, $metadata, $remains);
         }
 
-        return $this->getDefaultConverter()->convert($content, $remains);
+        return $this->getDefaultConverter()->convert($body, $metadata, $remains);
     }
 
     /**
@@ -110,7 +113,6 @@ class UrlRegex implements DocumentConverter
     protected function _loadConverter($converter)
     {
         if (!class_exists($converter)) {
-            //$converter = \Zend\Loader::loadClass($converter);
             throw new Exception\RuntimeException('class unload');
         }
 

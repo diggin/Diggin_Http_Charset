@@ -78,10 +78,10 @@ class Symfony2 extends Response
 
     public function getContent()
     {
-        $content = array('body' => parent::getContent(), 'content-type' => $this->getHeader('Content-Type', true, true));
-        $document = array('url' => $this->getUrl(), 'content' => $content);
+        $metadata = array('content-type' => $this->getHeader('Content-Type', true, true), 
+                          'url' => $this->getUrl());
         
-        return $this->getCharsetFront()->convert($document);
+        return $this->getCharsetFront()->convert(parent::getContent(), $metadata);
     }
 
     public function setUrl($url)

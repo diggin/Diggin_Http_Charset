@@ -77,10 +77,10 @@ class ZF1Wrapper extends \Zend_Http_Response
 
     public function getBody()
     {
-        $content = array('body' => parent::getBody(), 'content-type' => $this->getHeader('Content-type', true));
-        $document = array('url' => $this->getUrl(), 'content' => $content);
+        $metadata = array('content-type' => $this->getHeader('Content-type', true),
+                          'url' => $this->getUrl());
         
-        return $this->getCharsetFront()->convert($document);
+        return $this->getCharsetFront()->convert(parent::getBody(), $metadata);
     }
 
     public function setUrl($url)

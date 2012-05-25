@@ -31,22 +31,22 @@ abstract class AbstractConverter implements Converter
     /**
      * Return converted Response'body
      * 
-     * @param mixed
-     * array('content-type' => $var, 'body' => $html) | string $html
-     * (@param string $convert_vars)
+     * @param string $body
+     * @param string|array $metadata 'content-type' 
+     * $param $remains
      * 
      * @return mixed
      */
-    final public function convert($content, $remains = null)
+    final public function convert($body, $metadata = array(), $remains = null)
     {
-        $ctype = null;
-        if (is_array($content)) {
-            $ctype = (isset($content['content-type'])) ? $content['content-type'] : null;
-            $body  = $content['body'];
-        } elseif (is_string($content)) {
-            $body = $content;
+        if (is_string($metadata)) {
+            $ctype = $metadata;
+        } elseif (is_array($metadata)) {
+            $ctype = isset($metadata['content-type']) ? $metadata['content-type'] : null;
+        } else {
+            $ctype = null;
         }
-        
+
         $body = $this->_initBody($body);
         $encoding_from = $this->_encodingFrom($body, $ctype);
         

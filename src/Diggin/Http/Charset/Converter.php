@@ -27,5 +27,5 @@ namespace Diggin\Http\Charset;
 
 interface Converter
 {
-    public function convert($content, $remains = null);
+    public function convert($body, $metadata = array(), $remains = null);
 }

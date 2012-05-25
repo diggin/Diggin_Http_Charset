@@ -34,13 +34,11 @@ HTML;
 
         $converter = new HtmlConverter;
 
-        $ret = $converter->convert(array('body' => $sjishtml, 
-                                          'content-type' => 'text/html'));
+        $ret = $converter->convert($sjishtml, array('content-type' => 'text/html'));
         $this->assertEquals($html, $ret);
 
 
-        list($h, $r) = $converter->convert(array('body' => $sjishtml, 
-                                                         'content-type' =>  'text/html'),
+        list($h, $r) = $converter->convert($sjishtml, array('content-type' =>  'text/html'),
                                                   array(mb_convert_encoding('ああ', 'Shift-JIS', 'UTF-8')));
 
         $this->assertEquals($html, $h);
@@ -64,8 +62,7 @@ HTML;
 
         $converter = new HtmlConverter;
 
-        $ret = $converter->convert(array('body' => $sjisstring, 
-                                          'content-type' => 'text/html; charset=Shift-JIS'));
+        $ret = $converter->convert($sjisstring, array('content-type' => 'text/html; charset=Shift-JIS'));
 
         $this->assertEquals($html, $ret);
 
@@ -89,14 +86,12 @@ HTML;
 
         $converter = new HtmlConverter;
 
-        $ret = $converter->convert(array('body' => $tis620, 
-                                          'content-type' => 'text/html; charset=TIS-620'));
+        $ret = $converter->convert($tis620, array('content-type' => 'text/html; charset=TIS-620'));
         $this->assertEquals($html, $ret);
 
         $remain = $tis620;
 
-        list($ret, $ret_remain) = $converter->convert(array('body' => $tis620, 
-                                          'content-type' => 'text/html; charset=TIS-620'), array($remain));
+        list($ret, $ret_remain) = $converter->convert($tis620, array('content-type' => 'text/html; charset=TIS-620'), array($remain));
         $this->assertEquals($html, $ret);
         $this->assertEquals($html, current($ret_remain));
 

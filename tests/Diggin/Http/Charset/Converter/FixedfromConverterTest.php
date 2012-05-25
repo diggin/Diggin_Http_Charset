@@ -22,7 +22,7 @@ PLAIN;
   
         $converter = new FixedfromConverter('EUC-JP');
 
-        $ret = $converter->convert(array('body' => $eucjptext));
+        $ret = $converter->convert($eucjptext);
         $this->assertEquals('あいうえお', $ret);
 
     }

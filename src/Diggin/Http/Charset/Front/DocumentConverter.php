@@ -27,6 +27,6 @@ namespace Diggin\Http\Charset\Front;
 
 interface DocumentConverter
 {
-    public function convert($document, $remains = null);
+    public function convert($body, $metadata = array(), $remains = null);
 }
 
