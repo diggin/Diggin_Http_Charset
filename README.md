@@ -45,6 +45,3 @@ Similar library
 - python : Universal Encoding Detector
   - http://chardet.feedparser.org/
 
-FOR PHP5.2.x users
-----------------
-php5.2 branch is also available.
