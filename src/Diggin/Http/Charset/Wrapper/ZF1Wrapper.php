@@ -57,7 +57,7 @@ class ZF1Wrapper extends \Zend_Http_Response
     public function getHeaders()
     {
         $headers = parent::getHeaders();
-        return Filter::clearHeadersCharset($headers);
+        return Filter::replaceHeadersCharset($headers);
     }
 
     public function getHeader($header)
@@ -69,7 +69,7 @@ class ZF1Wrapper extends \Zend_Http_Response
                 return parent::getHeader($header);
             }
 
-            return Filter::clearHeaderCharset($value);
+            return Filter::replaceHeaderCharset($value);
         }
 
         return $value;

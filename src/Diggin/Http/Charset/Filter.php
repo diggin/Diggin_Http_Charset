@@ -49,4 +49,19 @@ final class Filter
     {
         return trim(preg_replace('/;\scharset=[A-Za-z0-9-_]+/i', '', $header));
     }
+
+    final public static function replaceHeadersCharset($headers, $charset = 'UTF-8')
+    {
+        if (isset($headers['Content-type'])) {
+            $headers['Content-type'] = self::replaceHeaderCharset($headers['Content-type'], $charset);
+        }
+
+        return $headers;
+    }
+
+    final public static function replaceHeaderCharset($header, $charset = 'UTF-8')
+    {
+        list($main) = explode(';', $header, 2);
+        return "$main; charset=$charset;";
+    }
 }

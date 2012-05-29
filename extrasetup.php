@@ -3,7 +3,9 @@
  * This file is used to provide extra files/packages outside package.xml
  * More information: http://pear.php.net/manual/en/pyrus.commands.package.php#pyrus.commands.package.extrasetup
  */
-$extrafiles = array();
+$extrafiles = array(
+    'php/PEAR2/HTTP/Request.php' => __DIR__.'/vendor/Symfony2/Response.php'                    
+);
 
 /**
  * for example:

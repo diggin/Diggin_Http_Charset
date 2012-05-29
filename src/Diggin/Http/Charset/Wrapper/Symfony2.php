@@ -58,7 +58,7 @@ class Symfony2 extends Response
     public function getHeaders()
     {
         $headers = parent::getHeaders();
-        return Filter::clearHeadersCharset($headers);
+        return Filter::replaceHeadersCharset($headers);
     }
 
     public function getHeader($header, $first = true)
@@ -70,7 +70,7 @@ class Symfony2 extends Response
                 return parent::getHeader($header, $first);
             }
 
-            return Filter::clearHeaderCharset($value);
+            return Filter::replaceHeaderCharset($value);
         }
 
         return $value;
