@@ -1,5 +1,5 @@
 {
-    "name":"diggin/Diggin_Http_Charset",
+    "name":"diggin/Diggin-Http-Charset",
     "description":"Detecting based on header's charset and html meta charset. Automatically convert to UTF-8.",
     "version":"0.1.0",
     "type":"library",
