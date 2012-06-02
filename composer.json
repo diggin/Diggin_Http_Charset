@@ -2,7 +2,8 @@
     "name":"diggin/Diggin_Http_Charset",
     "description":"Detecting based on header's charset and html meta charset. Automatically convert to UTF-8.",
     "version":"0.1.0",
-    "license":"LGPL",
+    "type":"library",
+    "license":"LGPL-2.0+",
     "authors":[
         {
             "name":"sasezaki",
@@ -14,7 +15,7 @@
     },
     "autoload": {
         "psr-0":{
-            "Diggin_Http_Charset":"src"
+            "Diggin\\Http\\Charset":"src/"
         }
     }
 }
