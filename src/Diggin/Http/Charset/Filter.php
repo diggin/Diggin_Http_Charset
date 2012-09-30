@@ -2,10 +2,10 @@
 
 /**
  * Diggin_Http_Charset
- * 
+ *
  * a part of this package (Diggin_Http_Charset_Detector_Html) is
  * borrowed from HTMLScraping
- * 
+ *
  * @see http://www.rcdtokyo.com/etc/htmlscraping/
  *
  * LICENSE: This source file is subject to the GNU Lesser General Public
@@ -33,7 +33,7 @@ final class Filter
      * Cut original Header's Charset
      * note: Zend_Http_Response's Headers key is ucwords(strtolower)..
      *
-     * @param array $headers (supported only Zend_Http_Response's Headers)
+     * @param  array $headers (supported only Zend_Http_Response's Headers)
      * @return array
      */
     final public static function clearHeadersCharset($headers)
@@ -62,6 +62,7 @@ final class Filter
     final public static function replaceHeaderCharset($header, $charset = 'UTF-8')
     {
         list($main) = explode(';', $header, 2);
+
         return "$main; charset=$charset;";
     }
 }

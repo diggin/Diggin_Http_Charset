@@ -2,10 +2,10 @@
 
 /**
  * Diggin_Http_Charset
- * 
+ *
  * a part of this package (Diggin_Http_Charset_Detector_Html) is
  * borrowed from HTMLScraping
- * 
+ *
  * @see http://www.rcdtokyo.com/etc/htmlscraping/
  *
  * LICENSE: This source file is subject to the GNU Lesser General Public
@@ -45,7 +45,7 @@ class HtmlDetector
      * @throw Diggin\Http\Charset\Exception\InvalidArgumentException
      */
     public function setConfig($config = array())
-    {  
+    {
         if ($config instanceof \Zend\Config) {
             $config = $config->toArray();
         } elseif (! is_array($config)) {
@@ -85,7 +85,7 @@ class HtmlDetector
 
     /**
      * Get list - against mb_preferred_mime_name()
-     * 
+     *
      * @return array
      */
     public function getListAgainstMime()
@@ -93,8 +93,8 @@ class HtmlDetector
         /**
         $preferrs = array();
         $couldnt = array();
-        foreach(mb_list_encodings() as $k => $v) {
-            if($p = @mb_preferred_mime_name($v)) {
+        foreach (mb_list_encodings() as $k => $v) {
+            if ($p = @mb_preferred_mime_name($v)) {
                 $preferrs[$k] = $p;
             } else {
                 $couldnt[$k] = $v;
@@ -105,11 +105,12 @@ class HtmlDetector
         $diff = array_diff($diff, $couldnt);
 
         $mb_list_against_preferr_mime = array();
-        foreach(array_flip($diff) as $v => $k){
+        foreach (array_flip($diff) as $v => $k) {
             $mb_list_against_preferr_mime[$v] = $preferrs[$k];
         }
         var_export($mb_list_against_preferr_mime);
         */
+
         return array(
             'UUENCODE' => 'x-uuencode',
             'ASCII' => 'US-ASCII',
@@ -124,12 +125,11 @@ class HtmlDetector
         );
     }
 
-    
     /**
      * Detect response's character code name
      *
-     * @param string $responseBody
-     * @param string $contentType
+     * @param  string $responseBody
+     * @param  string $contentType
      * @return string $encoding
      * @throw Diggin\Http\Charset\Exception
      */
@@ -158,7 +158,7 @@ class HtmlDetector
          */
         if ((in_array($encoding, $this->getListAgainstMime())) or (!$encoding or $this->_config['force_detect_body'])) {
             $detect = @mb_detect_encoding($responseBody, $this->getDetectOrder());
-        
+
             if (in_array($encoding, $this->getListAgainstMime())) {
                 return $detect;
             }
@@ -170,23 +170,23 @@ class HtmlDetector
                         throw new Exception\DetectException('Failed preferre_mime_name.');
                     }
                 }
+
                 return $detect;
             }
-            
+
             throw new Exception\DetectException('Failed detecting character encoding.');
         }
 
         //if ($wellknown = array_search($encoding, array('HZ-GB-2312' => 'GB-2312'))) {
         //  return $wellknown;
         //}
-
         return $encoding;
     }
 
     /**
      * Get Charset From Ctype
-     * 
-     * @param  string  $string
+     *
+     * @param  string $string
      * @return mixed
      */
     protected function _getCharsetFromCType($string)
@@ -201,6 +201,7 @@ class HtmlDetector
                 } else {
                     // force preferred_mime_name in CharsetFromCType
                     $preferred = @mb_preferred_mime_name($charset);
+
                     return ($preferred) ? $preferred : $charset;
                 }
             }
@@ -211,9 +212,9 @@ class HtmlDetector
 
     /**
      * Get Attribute from meta-tags
-     * 
-     * @param string $name:
-     * @param string $string:
+     *
+     * @param  string $name:
+     * @param  string $string:
      * @return mixed
      */
     protected function _getAttribute($name, $string)

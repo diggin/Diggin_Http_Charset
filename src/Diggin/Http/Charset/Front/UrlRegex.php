@@ -2,10 +2,10 @@
 
 /**
  * Diggin_Http_Charset
- * 
+ *
  * a part of this package (Diggin_Http_Charset_Detector_Html) is
  * borrowed from HTMLScraping
- * 
+ *
  * @see http://www.rcdtokyo.com/etc/htmlscraping/
  *
  * LICENSE: This source file is subject to the GNU Lesser General Public
@@ -43,13 +43,13 @@ class UrlRegex implements DocumentConverter
      * Convert Content(string, HTML&url set)
      *
      * @param string $body
-     * @param string $metadata 
-     *  expected 
+     * @param string $metadata
+     *  expected
      *   case 1 metadata array :
      *          ['content-type' => $var, 'url' => $url]
      *   case 2 url as string :
      *          'http://..'
-     * @param array $remains
+     * @param  array $remains
      * @return mixed string|array
      */
     public function convert($body, $metadata = array(), $remains = null)
@@ -57,19 +57,19 @@ class UrlRegex implements DocumentConverter
         $url = false;
         if (is_array($metadata) && isset($metadata['url'])) {
             $url = $metadata['url'];
-            unset($metadata['url']); 
-        } else if (is_string($metadata)) {
+            unset($metadata['url']);
+        } elseif (is_string($metadata)) {
             $url = $metadata;
         }
 
-        if ($url && $converter = $this->_checkMatch((string)$url)) {
+        if ($url && $converter = $this->_checkMatch((string) $url)) {
             if (is_callable($converter)) {
                 return call_user_func_array($converter, array($body, $metadata, $remains));
             }
             if (is_string($converter)) {
                 $converter = $this->_loadConverter($converter);
             }
-            
+
             return $converter->convert($body, $metadata, $remains);
         }
 

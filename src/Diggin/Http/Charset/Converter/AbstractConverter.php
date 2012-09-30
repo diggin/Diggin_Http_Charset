@@ -2,10 +2,10 @@
 
 /**
  * Diggin_Http_Charset
- * 
+ *
  * a part of this package (Diggin_Http_Charset_Detector_Html) is
  * borrowed from HTMLScraping
- * 
+ *
  * @see http://www.rcdtokyo.com/etc/htmlscraping/
  *
  * LICENSE: This source file is subject to the GNU Lesser General Public
@@ -30,11 +30,11 @@ abstract class AbstractConverter implements Converter
 {
     /**
      * Return converted Response'body
-     * 
-     * @param string $body
-     * @param string|array $metadata 'content-type' 
+     *
+     * @param string       $body
+     * @param string|array $metadata 'content-type'
      * $param $remains
-     * 
+     *
      * @return mixed
      */
     final public function convert($body, $metadata = array(), $remains = null)
@@ -49,16 +49,18 @@ abstract class AbstractConverter implements Converter
 
         $body = $this->_initBody($body);
         $encoding_from = $this->_encodingFrom($body, $ctype);
-        
-        // if not avilable for mbstring, using iconv 
+
+        // if not avilable for mbstring, using iconv
         if (!in_array($encoding_from, mb_list_encodings())) {
             $body = @iconv($encoding_from, 'UTF-8', $body);
             if (isset($remains)) {
                 foreach ($remains as $k => $v) {
                     $remains[$k] = @iconv($encoding_from, 'UTF-8', $v);
                 }
+
                 return array($body, $remains);
             }
+
             return $body;
         }
 
@@ -68,12 +70,13 @@ abstract class AbstractConverter implements Converter
             return array($body, $remains);
         } else {
             $body = mb_convert_encoding($body, 'UTF-8', $encoding_from);
+
             return $body;
         }
     }
 
     abstract protected function _encodingFrom($body, $ctype);
-    
+
     protected function _initBody($body)
     {
         /**

@@ -2,10 +2,10 @@
 
 /**
  * Diggin_Http_Charset
- * 
+ *
  * a part of this package (Diggin_Http_Charset_Detector_Html) is
  * borrowed from HTMLScraping
- * 
+ *
  * @see http://www.rcdtokyo.com/etc/htmlscraping/
  *
  * LICENSE: This source file is subject to the GNU Lesser General Public
@@ -41,7 +41,7 @@ final class WrapperFactory
     {
         if ($response instanceof \Zend_Http_Response) {
             // Zend Framework 1
-            $response = new Wrapper\ZF1Wrapper($response->getStatus(), 
+            $response = new Wrapper\ZF1Wrapper($response->getStatus(),
                                                 $response->getHeaders(),
                                                 $response->getRawBody(),
                                                 $response->getVersion(),
@@ -49,13 +49,14 @@ final class WrapperFactory
             $response->setUrl($url);
 
             return $response;
-        } else if ($response instanceof \Symfony\Component\BrowserKit\Response){
+        } elseif ($response instanceof \Symfony\Component\BrowserKit\Response) {
             $response = new Wrapper\Symfony2($response->getContent(),
-                                             $response->getStatus(), 
+                                             $response->getStatus(),
                                              $response->getHeaders());
             $response->setUrl($url);
+
             return $response;
-        } else if ($response instanceof \HttpMessage) {
+        } elseif ($response instanceof \HttpMessage) {
             if (HTTP_MSG_RESPONSE !== $response->getType()) {
                 throw new \Exception('Invalid Message Type :'. $response->getType());
             }
@@ -71,7 +72,7 @@ final class WrapperFactory
             $message->setUrl($url);
 
             return $message;
-        //} else if ($response instanceof Symfony\Component\BrowserKit\Response) {
+        //} elseif ($response instanceof Symfony\Component\BrowserKit\Response) {
             //Symfony2
         } else {
             throw new Exception\UnexpectedValueException('Unknown Object Type..');

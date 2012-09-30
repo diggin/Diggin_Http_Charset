@@ -2,10 +2,10 @@
 
 /**
  * Diggin_Http_Charset
- * 
+ *
  * a part of this package (Diggin_Http_Charset_Detector_Html) is
  * borrowed from HTMLScraping
- * 
+ *
  * @see http://www.rcdtokyo.com/etc/htmlscraping/
  *
  * LICENSE: This source file is subject to the GNU Lesser General Public
@@ -53,10 +53,11 @@ class ZF1Wrapper extends \Zend_Http_Response
 
         return $this->_charsetfront;
     }
-    
+
     public function getHeaders()
     {
         $headers = parent::getHeaders();
+
         return Filter::replaceHeadersCharset($headers);
     }
 
@@ -79,7 +80,7 @@ class ZF1Wrapper extends \Zend_Http_Response
     {
         $metadata = array('content-type' => $this->getHeader('Content-type', true),
                           'url' => $this->getUrl());
-        
+
         return $this->getCharsetFront()->convert(parent::getBody(), $metadata);
     }
 
