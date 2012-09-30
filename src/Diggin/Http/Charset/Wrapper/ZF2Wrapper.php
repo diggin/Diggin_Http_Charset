@@ -24,10 +24,10 @@
  * @namespace
  */
 namespace Diggin\Http\Charset\Wrapper;
-use Zend\Http\Response,
-    Diggin\Http\Charset\Filter,
-    Diggin\Http\Charset\Front\DocumentConverter,
-    Diggin\Http\Charset\Front\UrlRegex;
+use Zend\Http\Response;
+use Diggin\Http\Charset\Filter;
+use Diggin\Http\Charset\Front\DocumentConverter;
+use Diggin\Http\Charset\Front\UrlRegex;
 
 class ZF2Wrapper extends Response
 {

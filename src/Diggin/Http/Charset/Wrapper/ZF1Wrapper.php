@@ -24,11 +24,13 @@
  * @namespace
  */
 namespace Diggin\Http\Charset\Wrapper;
-use Diggin\Http\Charset\Filter,
-    Diggin\Http\Charset\Front\DocumentConverter,
-    Diggin\Http\Charset\Front\UrlRegex;
 
-class ZF1Wrapper extends \Zend_Http_Response
+use Zend_Http_Response;
+use Diggin\Http\Charset\Filter;
+use Diggin\Http\Charset\Front\DocumentConverter;
+use Diggin\Http\Charset\Front\UrlRegex;
+
+class ZF1Wrapper extends Zend_Http_Response
 {
     /**
      * @var Diggin_Http_Charset_Front_ConvertInterface

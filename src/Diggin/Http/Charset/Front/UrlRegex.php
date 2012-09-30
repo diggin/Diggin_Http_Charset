@@ -24,8 +24,8 @@
  * @namespace
  */
 namespace Diggin\Http\Charset\Front;
-use Diggin\Http\Charset\Converter\HtmlConverter,
-    Diggin\Http\Charset\Converter\Exception;
+use Diggin\Http\Charset\Converter\HtmlConverter;
+use Diggin\Http\Charset\Converter\Exception;
 
 class UrlRegex implements DocumentConverter
 {

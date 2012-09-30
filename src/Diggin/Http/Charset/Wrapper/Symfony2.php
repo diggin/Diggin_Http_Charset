@@ -24,10 +24,10 @@
  * @namespace
  */
 namespace Diggin\Http\Charset\Wrapper;
-use Diggin\Http\Charset\Filter,
-    Diggin\Http\Charset\Front\DocumentConverter,
-    Diggin\Http\Charset\Front\UrlRegex,
-    Symfony\Component\BrowserKit\Response;
+use Diggin\Http\Charset\Filter;
+use Diggin\Http\Charset\Front\DocumentConverter;
+use Diggin\Http\Charset\Front\UrlRegex;
+use Symfony\Component\BrowserKit\Response;
 
 class Symfony2 extends Response
 {
