@@ -41,15 +41,13 @@ class HtmlDetector
     /**
      * configure
      *
-     * @param array|Zend\Config
+     * @param array|Traversable
      * @throw Diggin\Http\Charset\Exception\InvalidArgumentException
      */
     public function setConfig($config = array())
     {
-        if ($config instanceof \Zend\Config) {
-            $config = $config->toArray();
-        } elseif (! is_array($config)) {
-            throw new Exception\InvalidArgumentException('Array or Zend_Config object expected, got ' . gettype($config));
+        if (! is_array($config) && !$config instanceof Traversable) {
+            throw new Exception\InvalidArgumentException('Array expected, got ' . gettype($config));
         }
 
         foreach ($config as $k => $v) {
