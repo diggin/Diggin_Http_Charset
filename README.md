@@ -19,7 +19,7 @@ Requirements
 Usage
 -----
 1. wrap response object:
-``` php
+```php
 <?php
 use Diggin\Http\Charset\WrapperFactory;
 $client = new Zend_Http_Client($url);
