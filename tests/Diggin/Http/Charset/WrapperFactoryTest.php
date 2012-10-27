@@ -30,8 +30,6 @@ EOF;
 
     public function testSymfony2BrowserKit()
     {
-        $inc = include_once dirname(dirname(dirname(dirname(__DIR__)))).'/vendor/Symfony2/Response.php';
-
         $html = <<<EOF
             <html lang="ja" xml:lang="ja" xmlns="http://www.w3.org/1999/xhtml">
             <head><meta content="text/html; charset=Shift-JIS" http-equiv="Content-Type" /></head>

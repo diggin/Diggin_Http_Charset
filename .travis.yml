@@ -1,7 +1,9 @@
 language: php
 
+before_script: composer install --dev
+
 php:
   - 5.3
   - 5.4
 
-script: phpunit --bootstrap tests/bootstrap.php tests
+script: phpunit -c tests/phpunit.xml
