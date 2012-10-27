@@ -100,7 +100,7 @@ BODY;
                             $detector->getDetectOrder());
     }
 
-    public function testIconMap()
+    public function testIconvMap()
     {
         $detector = new HtmlDetector();
         $bodyCP949 = iconv('UTF-8', 'CP949', '플랫폼에서는');
