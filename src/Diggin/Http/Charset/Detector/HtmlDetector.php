@@ -34,9 +34,14 @@ class HtmlDetector
      */
     private $_detectOrder = 'ASCII, JIS, UTF-8, eucJP-win, EUC-JP, SJIS-win, SJIS';
 
-    private $_config = array('accept_header_ctype' => true,
-                             'force_detect_body' => false,
-                             'detect_prefer_mime' => false);
+    private $_config = array(
+        'accept_header_ctype' => true,
+        'force_detect_body' => false,
+        'detect_prefer_mime' => false,
+        'iconv_map' => array(
+            'KS_C_5601-1987' => 'CP949',
+        ),
+    );
 
     /**
      * configure
@@ -178,6 +183,12 @@ class HtmlDetector
         //if ($wellknown = array_search($encoding, array('HZ-GB-2312' => 'GB-2312'))) {
         //  return $wellknown;
         //}
+
+        if (is_array($this->_config['iconv_map']) &&
+            in_array(strtoupper($encoding), array_keys($this->_config['iconv_map']))) {
+            $encoding = $this->_config['iconv_map'][strtoupper($encoding)];
+        }
+
         return $encoding;
     }
 

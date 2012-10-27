@@ -8,16 +8,8 @@ class HtmlDetectorTest extends \PHPUnit_Framework_TestCase
 
     private $detectOrder;
 
-    protected function setUp()
-    {
-    }
-
-    protected function tearDown()
-    {
-    }
-
     /**
-     * test "detect" part.1
+     * "detect" when only response body available
      */
     public function testDetectOnlyResponseBody() 
     {
@@ -91,10 +83,9 @@ BODY;
                             $detector->detect($bodySJIS, $ctype));
     }
 
-    public function testSetDetectOrder() {
-        
+    public function testSetDetectOrder() 
+    {
         $detector = new HtmlDetector();
-        
         $this->assertEquals(HtmlDetector::DEFAULT_DETECT_ORDER,
                             $detector->getDetectOrder());
         
@@ -109,6 +100,15 @@ BODY;
                             $detector->getDetectOrder());
     }
 
-}
+    public function testIconMap()
+    {
+        $detector = new HtmlDetector();
+        $bodyCP949 = iconv('UTF-8', 'CP949', '플랫폼에서는');
 
+        $charset = 'KS_C_5601-1987';
+        $ctype = "text/html; charset=$charset;";
+        $detect = $detector->detect($bodyCP949, $ctype);
+        $this->assertEquals('CP949', $detect, 'detect should iconv handle available');
+    }
+}
 
