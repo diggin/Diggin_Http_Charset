@@ -28,6 +28,10 @@ $response = WrapperFactory::wrapResponse($response); // then, response getBody()
 
 Please see more at demos/Diggin/Http/Charset .
 
+Guzzle & Goutte
+---------------
+[guzzle-plugin-AutoCharsetEncodingPlugin](https://github.com/diggin/guzzle-plugin-AutoCharsetEncodingPlugin) supports for using with Guzzle.
+
 Technical Information
 ---------------------
 Diggin_Http_Charset is based on HTMLScraping.
@@ -45,4 +49,9 @@ Similar library
   - http://blog.livedoor.jp/dankogai/archives/50811793.html
 - python : Universal Encoding Detector
   - http://chardet.feedparser.org/
+
+TODOs
+-------------
+- better APIs & according ZF2 coding standard.
+- struggle in more charset :-\
 
