@@ -19,12 +19,13 @@ Requirements
 Usage
 -----
 1. wrap response object:
-<pre>
+``` php
+<?php
 use Diggin\Http\Charset\WrapperFactory;
 $client = new Zend_Http_Client($url);
 $response = $client->request();
-$response = WrapperFactory::wrapResponse($response); // then, response getBody() is UTF-8.
-</pre>
+$response = WrapperFactory::wrapResponse($response); // then, response getBody() return UTF-8.
+```
 
 Please see more at demos/Diggin/Http/Charset .
 
