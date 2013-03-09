@@ -23,7 +23,7 @@ var_dump($cType = detect_contenttype_from_http_response_header($http_response_he
 
 <?php
 include 'SplClassLoader.php';
-$loader = new SplClassLoader('Diggin', dirname(dirname(dirname(dirname(__DIR__)))).'/library');
+$loader = new SplClassLoader('Diggin', dirname(dirname(dirname(dirname(__DIR__)))).'/src');
 $loader->register();
 
 $front = new \Diggin\Http\Charset\Front\UrlRegex;
@@ -35,10 +35,11 @@ var_dump(mb_substr(preg_replace('/\s*/s', '',strip_tags($converted_html)), 0, 80
 echo PHP_EOL, PHP_EOL;
 
 echo 'trying convert html with content-type..', PHP_EOL; sleep(1);
-$converted_html = $front->convert(array(
-    'url' => $url, 
-    'content' => array('body' => $html, 'content-type' => $cType))
-);
+$converted_html = $front->convert($html, array(
+        'url' => $url, 
+        'content-type' => $cType
+        )
+    );
 
 var_dump(mb_substr(preg_replace('/\s*/s', '',strip_tags($converted_html)), 0, 800));
 
