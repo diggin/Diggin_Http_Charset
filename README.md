@@ -3,7 +3,7 @@ Diggin_Http_Charset
 
 Automatically convert to UTF-8.
 
-Master: [![Build Status](https://secure.travis-ci.org/diggin/Diggin_Http_Charset.png?branch=master)](http://travis-ci.org/diggin/Diggin_Http_Charset)
+Master: [![Build Status](https://travis-ci.org/diggin/Diggin_Http_Charset.png?branch=master)](https://travis-ci.org/diggin/Diggin_Http_Charset)
 
 Detecting based on header's charset & html meta charset.
 
