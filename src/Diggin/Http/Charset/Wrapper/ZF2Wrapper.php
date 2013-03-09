@@ -25,7 +25,6 @@
  */
 namespace Diggin\Http\Charset\Wrapper;
 use Zend\Http\Response;
-use Diggin\Http\Charset\Filter;
 use Diggin\Http\Charset\Front\DocumentConverter;
 use Diggin\Http\Charset\Front\UrlRegex;
 use Diggin\Http\Charset\Wrapper\ZF2Wrapper\Headers;
@@ -60,9 +59,10 @@ class ZF2Wrapper extends Response
      * override original ZF2 Response method.
      */
     public function getHeaders()
-    {  
+    {
         $this->headers->getPluginClassLoader()
             ->registerPlugin('contenttype', 'Diggin\Http\Charset\Wrapper\ZF2Wrapper\HeaderContentType');
+
         return $this->headers;
     }
 

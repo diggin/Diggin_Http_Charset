@@ -48,6 +48,7 @@ final class WrapperFactory
             $wrapper->setContent($response->getContent());
             $wrapper->setMetadata($response->getMetadata());
             $wrapper->setUrl($url);
+
             return $wrapper;
         } elseif ($response instanceof \Symfony\Component\BrowserKit\Response) {
             $response = new Wrapper\Symfony2($response->getContent(),
