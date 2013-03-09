@@ -19,6 +19,7 @@ Requirements
 Usage
 -----
 1. wrap response object:
+
 ```php
 <?php
 use Diggin\Http\Charset\WrapperFactory;
@@ -53,6 +54,7 @@ Similar library
 
 TODOs
 -------------
+- handling non text/html content types.
 - better APIs & according ZF2 coding standard.
 - struggle in more charset :-\
 
