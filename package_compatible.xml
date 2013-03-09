@@ -10,8 +10,8 @@
   <email>sasezaki@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2012-10-27</date>
- <time>22:33:55</time>
+ <date>2013-03-09</date>
+ <time>22:22:11</time>
  <version>
   <release>0.1.0</release>
   <api>0.1.0</api>
@@ -33,8 +33,8 @@
    <file role="test" name="test/pear.diggin.musicrider.com/Diggin_Http_Charset/Diggin/Http/Charset/Converter/Diggin/Http/Charset/Converter/FixedfromConverterTest.php"/>
    <file role="test" name="test/pear.diggin.musicrider.com/Diggin_Http_Charset/bootstrap.php"/>
    <file role="php" name="php/Diggin/Http/Charset/WrapperFactory.php"/>
+   <file role="php" name="php/Diggin/Http/Charset/Wrapper/ZF2Wrapper/HeaderContentType.php"/>
    <file role="php" name="php/Diggin/Http/Charset/Wrapper/ZF2Wrapper.php"/>
-   <file role="php" name="php/Diggin/Http/Charset/Wrapper/ZF1Wrapper.php"/>
    <file role="php" name="php/Diggin/Http/Charset/Wrapper/Symfony2.php"/>
    <file role="php" name="php/Diggin/Http/Charset/Wrapper/PeclHttpMessageWrapper.php"/>
    <file role="php" name="php/Diggin/Http/Charset/Front/UrlRegex.php"/>
@@ -53,7 +53,7 @@
  <dependencies>
   <required>
    <php>
-    <min>5.3.0</min>
+    <min>5.3.3</min>
    </php>
    <pearinstaller>
     <min>1.4.8</min>
@@ -81,8 +81,8 @@
    <install name="php/Diggin/Http/Charset/Front/UrlRegex.php" as="Diggin/Http/Charset/Front/UrlRegex.php"/>
    <install name="php/Diggin/Http/Charset/Wrapper/PeclHttpMessageWrapper.php" as="Diggin/Http/Charset/Wrapper/PeclHttpMessageWrapper.php"/>
    <install name="php/Diggin/Http/Charset/Wrapper/Symfony2.php" as="Diggin/Http/Charset/Wrapper/Symfony2.php"/>
-   <install name="php/Diggin/Http/Charset/Wrapper/ZF1Wrapper.php" as="Diggin/Http/Charset/Wrapper/ZF1Wrapper.php"/>
    <install name="php/Diggin/Http/Charset/Wrapper/ZF2Wrapper.php" as="Diggin/Http/Charset/Wrapper/ZF2Wrapper.php"/>
+   <install name="php/Diggin/Http/Charset/Wrapper/ZF2Wrapper/HeaderContentType.php" as="Diggin/Http/Charset/Wrapper/ZF2Wrapper/HeaderContentType.php"/>
    <install name="php/Diggin/Http/Charset/WrapperFactory.php" as="Diggin/Http/Charset/WrapperFactory.php"/>
    <install name="test/pear.diggin.musicrider.com/Diggin_Http_Charset/bootstrap.php" as="Diggin_Http_Charset/bootstrap.php"/>
    <install name="test/pear.diggin.musicrider.com/Diggin_Http_Charset/Diggin/Http/Charset/Converter/Diggin/Http/Charset/Converter/FixedfromConverterTest.php" as="Diggin_Http_Charset/Diggin/Http/Charset/Converter/Diggin/Http/Charset/Converter/FixedfromConverterTest.php"/>
