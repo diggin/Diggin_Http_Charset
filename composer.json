@@ -17,11 +17,11 @@
         }
     ],
     "require":{
-        "php":">=5.3.0"
+        "php":">=5.3.3"
     },
     "require-dev":{
-        "zendframework/zend-http": "2.0.*",
-        "symfony/browser-kit": "2.1.*"
+        "zendframework/zend-http": "2.1.*",
+        "symfony/browser-kit": "2.2.*"
     },
     "autoload": {
         "psr-0":{

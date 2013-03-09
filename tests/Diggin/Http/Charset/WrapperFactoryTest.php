@@ -1,13 +1,12 @@
 <?php
 namespace DigginTest\Http\Charset;
-use Diggin\Http\Charset\WrapperFactory,
-    Diggin\Http\Charset\Wrapper\ZF1Wrapper;
+use Diggin\Http\Charset\WrapperFactory;
+use Diggin\Http\Charset\Wrapper\ZF2Wrapper;
 
 class WrapperFactoryTest extends \PHPUnit_Framework_TestCase
 {
-    public function testZF1()
+    public function testZF2()
     {
-        $inc = include_once dirname(dirname(dirname(dirname(__DIR__)))).'/vendor/ZF1/Zend/Http/Response.php';
 
         $header = "HTTP/1.1 200 OK" ."\r\n".
                   "Content-Type: text/html; charset=Shift-JIS";
@@ -19,12 +18,12 @@ EOF;
 
         $sjis = mb_convert_encoding($html, 'SJIS-win', 'UTF-8');
 
-        $response = \Zend_Http_Response::fromString("$header\r\n\r\n$sjis");
+        $response = \Zend\Http\Response::fromString("$header\r\n\r\n$sjis");
 
         $response = WrapperFactory::factory($response);
         
-        $this->assertInstanceOf('Zend_Http_Response', $response);
-        $this->assertInstanceOf('Diggin\\Http\Charset\\Wrapper\\ZF1Wrapper', $response);
+        $this->assertInstanceOf('Zend\\Http\\Response', $response);
+        $this->assertInstanceOf('Diggin\\Http\Charset\\Wrapper\\ZF2Wrapper', $response);
         $this->assertEquals($html, $response->getBody());
     }
 

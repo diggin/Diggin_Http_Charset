@@ -28,6 +28,7 @@ use Zend\Http\Response;
 use Diggin\Http\Charset\Filter;
 use Diggin\Http\Charset\Front\DocumentConverter;
 use Diggin\Http\Charset\Front\UrlRegex;
+use Diggin\Http\Charset\Wrapper\ZF2Wrapper\Headers;
 
 class ZF2Wrapper extends Response
 {
@@ -55,31 +56,22 @@ class ZF2Wrapper extends Response
         return $this->_charsetfront;
     }
 
+    /**
+     * override original ZF2 Response method.
+     */
     public function getHeaders()
-    {
-        $headers = parent::getHeaders();
-
-        return Filter::replaceHeadersCharset($headers);
-    }
-
-    public function getHeader($header)
-    {
-        $value = parent::getHeader($header);
-        if ('Content-type' == ucwords(strtolower($header))) {
-            $args = func_get_args();
-            if (isset($args[1]) && true === $args[1]) {
-                return parent::getHeader($header);
-            }
-
-            return Filter::replaceHeaderCharset($value);
-        }
-
-        return $value;
+    {  
+        $this->headers->getPluginClassLoader()
+            ->registerPlugin('contenttype', 'Diggin\Http\Charset\Wrapper\ZF2Wrapper\HeaderContentType');
+        return $this->headers;
     }
 
     public function getBody()
     {
-        $metadata = array('content-type' => $this->getHeader('Content-type', true),'url' => $this->getUrl());
+        $metadata = array(
+            'content-type' => $this->getHeaders()->get('contenttype')->getOriginalFieldValue(),
+            'url' => $this->getUrl()
+        );
 
         return $this->getCharsetFront()->convert(parent::getBody(), $metadata);
     }

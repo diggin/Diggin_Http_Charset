@@ -1,6 +1,7 @@
 <?php
 namespace DigginTest\Http\Charset;
 use Diggin\Http\Charset\Filter;
+use Zend\Http\Response;
 
 class FilterTest extends \PHPUnit_Framework_TestCase
 {
@@ -9,13 +10,11 @@ class FilterTest extends \PHPUnit_Framework_TestCase
         $header = "HTTP/1.1 200 OK" ."\r\n".
                "Content-Type: text/html; charset=Shift-JIS";
 
-        $inc = include_once dirname(dirname(dirname(dirname(__DIR__)))).'/vendor/ZF1/Zend/Http/Response.php';
+        $response = Response::fromString("$header\r\n\r\nABC");
 
-        $response = \Zend_Http_Response::fromString("$header\r\n\r\nABC");
-
-        $c = Filter::clearHeadersCharset($response->getHeaders());
+        $c = Filter::clearHeadersCharset($response->getHeaders()->toArray());
         
-        $this->assertEquals('text/html', $c['Content-type']);
+        $this->assertEquals('text/html', $c['Content-Type']);
     }
 }
 

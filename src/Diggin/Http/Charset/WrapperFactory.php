@@ -31,7 +31,7 @@ final class WrapperFactory
 
     /**
      * wrap response objects
-     *  Zend_Http_Response, HttpMessage
+     *  Zend\Http\Response, HttpMessage
      *
      *  @param mixed object to wrap
      *  @param string
@@ -39,16 +39,16 @@ final class WrapperFactory
      */
     final public static function factory($response, $url = null)
     {
-        if ($response instanceof \Zend_Http_Response) {
-            // Zend Framework 1
-            $response = new Wrapper\ZF1Wrapper($response->getStatus(),
-                                                $response->getHeaders(),
-                                                $response->getRawBody(),
-                                                $response->getVersion(),
-                                                $response->getMessage());
-            $response->setUrl($url);
-
-            return $response;
+        if ($response instanceof \Zend\Http\Response) {
+            $wrapper = new Wrapper\ZF2Wrapper();
+            $wrapper->setVersion($response->getVersion());
+            $wrapper->setStatusCode($response->getStatusCode());
+            $wrapper->setReasonPhrase($response->getReasonPhrase());
+            $wrapper->setHeaders($response->getHeaders());
+            $wrapper->setContent($response->getContent());
+            $wrapper->setMetadata($response->getMetadata());
+            $wrapper->setUrl($url);
+            return $wrapper;
         } elseif ($response instanceof \Symfony\Component\BrowserKit\Response) {
             $response = new Wrapper\Symfony2($response->getContent(),
                                              $response->getStatus(),
@@ -72,8 +72,6 @@ final class WrapperFactory
             $message->setUrl($url);
 
             return $message;
-        //} elseif ($response instanceof Symfony\Component\BrowserKit\Response) {
-            //Symfony2
         } else {
             throw new Exception\UnexpectedValueException('Unknown Object Type..');
         }

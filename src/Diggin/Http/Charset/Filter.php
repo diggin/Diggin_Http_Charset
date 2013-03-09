@@ -31,15 +31,15 @@ final class Filter
 
     /**
      * Cut original Header's Charset
-     * note: Zend_Http_Response's Headers key is ucwords(strtolower)..
+     * note: Zend\Http\Response's Headers key is ucwords(strtolower) & underscores
      *
-     * @param  array $headers (supported only Zend_Http_Response's Headers)
+     * @param  array $headers (supported only Zend\Http\Response's Headers)
      * @return array
      */
     final public static function clearHeadersCharset($headers)
     {
-        if (isset($headers['Content-type'])) {
-            $headers['Content-type'] = self::clearHeaderCharset($headers['Content-type']);
+        if (isset($headers['Content-Type'])) {
+            $headers['Content-Type'] = self::clearHeaderCharset($headers['Content-Type']);
         }
 
         return $headers;
@@ -52,8 +52,8 @@ final class Filter
 
     final public static function replaceHeadersCharset($headers, $charset = 'UTF-8')
     {
-        if (isset($headers['Content-type'])) {
-            $headers['Content-type'] = self::replaceHeaderCharset($headers['Content-type'], $charset);
+        if (isset($headers['Content-Type'])) {
+            $headers['Content-Type'] = self::replaceHeaderCharset($headers['Content-Type'], $charset);
         }
 
         return $headers;
