@@ -24,8 +24,8 @@ Usage
 <?php
 use Diggin\Http\Charset\WrapperFactory;
 $client = new Zend\Http\Client($url);
-$response = $client->request();
-$response = WrapperFactory::wrapResponse($response); // then, response getBody() return UTF-8.
+$response = $client->send();
+$response = WrapperFactory::wrapResponse($response); // then, response getBody() return with converted UTF-8.
 ```
 
 Please see more at demos/Diggin/Http/Charset .
