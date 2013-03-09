@@ -23,7 +23,7 @@ Usage
 ```php
 <?php
 use Diggin\Http\Charset\WrapperFactory;
-$client = new Zend_Http_Client($url);
+$client = new Zend\Http\Client($url);
 $response = $client->request();
 $response = WrapperFactory::wrapResponse($response); // then, response getBody() return UTF-8.
 ```
@@ -33,6 +33,7 @@ Please see more at demos/Diggin/Http/Charset .
 Guzzle & Goutte
 ---------------
 [guzzle-plugin-AutoCharsetEncodingPlugin](https://github.com/diggin/guzzle-plugin-AutoCharsetEncodingPlugin) supports for using with Guzzle.
+[Usage of with Behat](https://gist.github.com/MugeSo/3971150) by @MugeSo
 
 Technical Information
 ---------------------
