@@ -162,15 +162,25 @@ class HtmlDetector
         if ((in_array($encoding, $this->getListAgainstMime())) or (!$encoding or $this->_config['force_detect_body'])) {
             $detect = @mb_detect_encoding($responseBody, $this->getDetectOrder());
 
-            if (in_array($encoding, $this->getListAgainstMime())) {
-                return $detect;
+            /*
+             * If previous search failed, do a scan against all known encodings
+             * Ideally the user never gets here, because there's a performance penalty,
+             * redundancy against previous detection, and the order is not based on
+             * our preference.
+             */
+            if (!$detect) {
+                $detect = @mb_detect_encoding($responseBody, mb_list_encodings());
             }
 
             if ($detect) {
+                if (in_array($encoding, $this->getListAgainstMime())) {
+                    return $detect;
+                }
+
                 if ($this->_config['detect_prefer_mime']) {
                     $detect = @mb_preferred_mime_name($detect);
                     if (!$detect) {
-                        throw new Exception\DetectException('Failed preferre_mime_name.');
+                        throw new Exception\DetectException('Failed preferred_mime_name.');
                     }
                 }
 
