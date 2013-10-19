@@ -10,18 +10,12 @@
             "email":"sasezaki@gmail.com"
         }
     ],
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "http://packages.zendframework.com/"
-        }
-    ],
     "require":{
         "php":">=5.3.3"
     },
     "require-dev":{
-        "zendframework/zend-http": "2.1.*",
-        "symfony/browser-kit": "2.2.*"
+        "zendframework/zend-http": "2.2.*",
+        "symfony/browser-kit": "2.3.*"
     },
     "autoload": {
         "psr-0":{
