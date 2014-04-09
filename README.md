@@ -32,7 +32,8 @@ Please see more at demos/Diggin/Http/Charset .
 
 Guzzle & Goutte
 ---------------
-[guzzle-plugin-AutoCharsetEncodingPlugin](https://github.com/diggin/guzzle-plugin-AutoCharsetEncodingPlugin) supports for using with Guzzle.
+[guzzle-plugin-AutoCharsetEncodingPlugin](https://github.com/diggin/guzzle-plugin-AutoCharsetEncodingPlugin) supports for using with Guzzle3.
+
 [Usage of with Behat](https://gist.github.com/MugeSo/3971150) by @MugeSo
 
 Technical Information
