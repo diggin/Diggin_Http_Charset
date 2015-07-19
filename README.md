@@ -26,7 +26,7 @@ Usage
 use Diggin\Http\Charset\WrapperFactory;
 $client = new Zend\Http\Client($url);
 $response = $client->send();
-$response = WrapperFactory::wrapResponse($response); // then, response getBody() return with converted UTF-8.
+$response = WrapperFactory::factory($response); // then, response getBody() return with converted UTF-8.
 ```
 
 Please see more at demos/Diggin/Http/Charset .
