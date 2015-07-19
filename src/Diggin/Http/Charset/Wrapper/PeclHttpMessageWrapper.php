@@ -37,7 +37,7 @@ class PeclHttpMessageWrapper extends \HttpMessage
 
     public function setCharsetFront(DocumentConverter $charsetfront)
     {
-        $this->_charsetfront = $chasetfront;
+        $this->_charsetfront = $charsetfront;
     }
 
     public function getCharsetFront()
