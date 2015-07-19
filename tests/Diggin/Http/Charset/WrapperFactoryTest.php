@@ -20,11 +20,12 @@ EOF;
 
         $response = \Zend\Http\Response::fromString("$header\r\n\r\n$sjis");
 
-        $response = WrapperFactory::factory($response);
+
+        $wrapper = WrapperFactory::factory($response);
         
-        $this->assertInstanceOf('Zend\\Http\\Response', $response);
-        $this->assertInstanceOf('Diggin\\Http\Charset\\Wrapper\\ZF2Wrapper', $response);
-        $this->assertEquals($html, $response->getBody());
+        $this->assertInstanceOf('Zend\\Http\\Response', $wrapper);
+        $this->assertInstanceOf('Diggin\\Http\Charset\\Wrapper\\ZF2Wrapper', $wrapper);
+        $this->assertEquals($html, $wrapper->getBody());
     }
 
     public function testSymfony2BrowserKit()

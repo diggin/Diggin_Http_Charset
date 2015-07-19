@@ -8,7 +8,7 @@ class HeaderContentType extends ContentType
 
     public function getOriginalFieldValue()
     {
-        return $this->value;
+        return parent::getFieldValue();
     }
 
     public function getFieldValue()
