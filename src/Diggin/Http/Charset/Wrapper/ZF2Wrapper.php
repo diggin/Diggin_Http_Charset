@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Diggin\Http\Charset\Wrapper;
+use Diggin\Http\Charset\Wrapper\ZF2Wrapper\HeaderContentType;
 use Zend\Http\Response;
 use Diggin\Http\Charset\Front\DocumentConverter;
 use Diggin\Http\Charset\Front\UrlRegex;
@@ -32,7 +33,7 @@ use Diggin\Http\Charset\Wrapper\ZF2Wrapper\Headers;
 class ZF2Wrapper extends Response
 {
     /**
-     * @var Diggin\Http\Charset\Front\DocumentConverter
+     * @var DocumentConverter
      */
     private $_charsetfront;
 
@@ -43,7 +44,7 @@ class ZF2Wrapper extends Response
 
     public function setCharsetFront(DocumentConverter $charsetfront)
     {
-        $this->_charsetfront = $chasetfront;
+        $this->_charsetfront = $charsetfront;
     }
 
     public function getCharsetFront()
@@ -68,8 +69,11 @@ class ZF2Wrapper extends Response
 
     public function getBody()
     {
+        /** @var HeaderContentType $contentType */
+        $contentType = $this->getHeaders()->get('content-type');
+
         $metadata = array(
-            'content-type' => $this->getHeaders()->get('contenttype')->getOriginalFieldValue(),
+            'content-type' => $contentType->getOriginalFieldValue(),
             'url' => $this->getUrl()
         );
 
